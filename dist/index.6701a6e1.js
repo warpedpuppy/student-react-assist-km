@@ -969,7 +969,7 @@ class SuperFlixApplication extends _reactDefault.default.Component {
     }
 }
 // Finds  the root of the app
-const container = document.getElementsByClassName('app-comtainer')[0];
+const container = document.getElementsByClassName('app-container')[0];
 // Tells React to render your app in the root DOM element
 _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElement(SuperFlixApplication), container);
 
