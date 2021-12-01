@@ -2,15 +2,17 @@ import React from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
+let imgPath = './img/';
+
 export class MainView extends React.Component {
 
   constructor() {
     super();
     this.state = {
       movies: [
-        { _id: 1, Title: 'Captain America', Description: 'desc1...', ImagePath: '...' },
-        { _id: 2, Title: 'Captain Marvel', Description: 'desc2...', ImagePath: '...' },
-        { _id: 3, Title: 'IronMan', Description: 'desc3...', ImagePath: '...' }
+        { _id: 1, Title: 'Captain America: The First Avenger', Description: 'Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a "Super-Soldier serum". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.', ImagePath: imgPath + 'FirstAvenger.jpeg', Series: 'Marvel Cinematic Universe', Director: 'Joe Johnston' },
+        { _id: 2, Title: 'Captain Marvel', Description: 'Carol Danvers becomes one of the universe\'s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.', ImagePath: imgPath + 'captainmarvel.png', Series: 'Marvel Cinematic Universe', Director: 'Ryan Fleck' },
+        { _id: 3, Title: 'Iron Man', Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.', ImagePath: imgPath + 'iron-man.jpg', Series: 'Marvel Cinematic Universe', Director: 'Jon Favreau' }
       ],
       selectedMovie: null
     };

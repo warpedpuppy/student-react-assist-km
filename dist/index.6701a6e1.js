@@ -22896,6 +22896,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
+let imgPath = './img/';
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -22903,21 +22904,27 @@ class MainView extends _reactDefault.default.Component {
             movies: [
                 {
                     _id: 1,
-                    Title: 'Captain America',
-                    Description: 'desc1...',
-                    ImagePath: '...'
+                    Title: 'Captain America: The First Avenger',
+                    Description: 'Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a "Super-Soldier serum". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.',
+                    ImagePath: imgPath + 'FirstAvenger.jpeg',
+                    Series: 'Marvel Cinematic Universe',
+                    Director: 'Joe Johnston'
                 },
                 {
                     _id: 2,
                     Title: 'Captain Marvel',
-                    Description: 'desc2...',
-                    ImagePath: '...'
+                    Description: 'Carol Danvers becomes one of the universe\'s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.',
+                    ImagePath: imgPath + 'captainmarvel.png',
+                    Series: 'Marvel Cinematic Universe',
+                    Director: 'Ryan Fleck'
                 },
                 {
                     _id: 3,
-                    Title: 'IronMan',
-                    Description: 'desc3...',
-                    ImagePath: '...'
+                    Title: 'Iron Man',
+                    Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
+                    ImagePath: imgPath + 'iron-man.jpg',
+                    Series: 'Marvel Cinematic Universe',
+                    Director: 'Jon Favreau'
                 }
             ],
             selectedMovie: null
@@ -22934,7 +22941,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 28
+                lineNumber: 30
             },
             __self: this,
             children: "The list is empty!"
@@ -22943,7 +22950,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 31
+                lineNumber: 33
             },
             __self: this,
             children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
@@ -22953,7 +22960,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 33
+                    lineNumber: 35
                 },
                 __self: this
             }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -22963,7 +22970,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 35
+                        lineNumber: 37
                     },
                     __self: this
                 }, movie._id)
