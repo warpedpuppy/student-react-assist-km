@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { MainView } from './components/main-view/main-view';
 
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
 
 // Main component
 class SuperFlixApplication extends React.Component {
-    render() {
-        return (
-          <div className="super-flix">
-            <div>Good morning</div>
-          </div>
-        );
-    }
+  render() {
+    return (
+      <MainView />
+    );
+  }
 }
 
 // Finds  the root of the app
