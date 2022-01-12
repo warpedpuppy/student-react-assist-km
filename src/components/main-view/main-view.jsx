@@ -4,11 +4,6 @@ import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-import cptMarvelImg from '../../img/captainmarvel.png';
-console.log('marvel poster: ' + cptMarvelImg)
-
-let imgPath = './img/';
-
 export class MainView extends React.Component {
 
   constructor() {
@@ -23,7 +18,7 @@ export class MainView extends React.Component {
     };
   }
 
-  componenetDidMount() {
+  componentDidMount() {
     axios.get('https://superflix-db.herokuapp.com/movies')
       .then(response => {
         this.setState({
@@ -44,7 +39,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie } = this.state;
 
-    if (movies.length === 0) return <div className="main view">The list is empty!</div>;
+    if (movies.length === 0) return <div className="main view" />;
 
     return (
       <div className="main-view">
