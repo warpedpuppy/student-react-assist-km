@@ -1,1 +1,0 @@
-{"mappings":"AAEA;EACI,OAHI","sources":["src/index.scss"],"sourcesContent":["$color: steelblue;\n\n.super-flix {\n    color: $color;\n}\n"],"names":[],"version":3,"file":"index.1f6edfee.css.map","sourceRoot":"/__parcel_source_root/"}
