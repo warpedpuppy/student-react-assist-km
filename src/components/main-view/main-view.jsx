@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view'
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -10,18 +11,16 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        //{ _id: 1, Title: 'Captain America: The First Avenger', Description: 'Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a "Super-Soldier serum". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.', ImagePath: 'https://raw.githubusercontent.com/k8molony/superFlix-client/main/img/FirstAvenger.jpeg', Series: 'Marvel Cinematic Universe', Director: 'Joe Johnston' },
-        //{ _id: 2, Title: 'Captain Marvel', Description: 'Carol Danvers becomes one of the universe\'s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.', ImagePath: 'https://raw.githubusercontent.com/k8molony/superFlix-client/main/img/captainmarvel.jpg', Series: 'Marvel Cinematic Universe', Director: 'Ryan Fleck' },
-        //{ _id: 3, Title: 'Iron Man', Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.', ImagePath: 'https://github.com/k8molony/superFlix-client/blob/main/img/iron-man.jpg?raw=true', Series: 'Marvel Cinematic Universe', Director: 'Jon Favreau' }
-      ],
+      movies: [],
       selectedMovie: null,
-      user: null
+      user: null,
+      registered: true
     };
   }
 
+  //load in movies from my database after rendering MainView
   componentDidMount() {
-    /* axios.get('https://superflix-db.herokuapp.com/movies')
+    axios.get('https://superflix-db.herokuapp.com/movies')
       .then(response => {
         this.setState({
           movies: response.data
@@ -29,28 +28,52 @@ export class MainView extends React.Component {
       })
       .catch(error => {
         console.log(error);
-      }); */
+      });
   }
 
+  // Passed to MovieCard
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
+  // Passed to LoginView
   onLoggedIn(user) {
     this.setState({
       user
     });
   }
 
+  // Passed to RegistrationView
+  onRegister(registered, user) {
+    this.setState({
+      registered,
+      user
+    });
+  }
+
+  toRegistrationView(asdf) {
+    this.setState({
+      registered: false
+    });
+  }
+
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, selectedMovie, user, registered } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // RegistrationView if user is not registered
+    if (!registered) return <RegistrationView onRegister={(registered, username) => this.onRegister(registered, username)} />;
 
+    // LoginView if user is registered but not logged in
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} toRegistrationView={asdf => this.toRegistrationView(asdf)} />;
+
+    // Empty MainView if there are no movies
     if (movies.length === 0) return <div className="main view" />;
 
+    // If user is registered and logged in
+    // Render list of MovieCard comps if no movie is selected
+    // Go to MovieView if a movie is selected
     return (
       <div className="main-view">
         {selectedMovie
