@@ -22796,10 +22796,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _loginView = require("../login-view/login-view");
-<<<<<<< Updated upstream
 var _registrationView = require("../registration-view/registration-view");
-=======
->>>>>>> Stashed changes
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 class MainView extends _reactDefault.default.Component {
@@ -22808,7 +22805,6 @@ class MainView extends _reactDefault.default.Component {
         this.state = {
             movies: [],
             selectedMovie: null,
-<<<<<<< Updated upstream
             user: null,
             registered: true
         };
@@ -22824,36 +22820,17 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     // Passed to MovieCard
-=======
-            user: null
-        };
-    }
-    componentDidMount() {
-    /* axios.get('https://superflix-db.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      }); */ }
->>>>>>> Stashed changes
     setSelectedMovie(movie) {
         this.setState({
             selectedMovie: movie
         });
     }
-<<<<<<< Updated upstream
     // Passed to LoginView
-=======
->>>>>>> Stashed changes
     onLoggedIn(user) {
         this.setState({
             user
         });
     }
-<<<<<<< Updated upstream
     // Passed to RegistrationView
     onRegister(registered, user) {
         this.setState({
@@ -22887,33 +22864,16 @@ class MainView extends _reactDefault.default.Component {
             columnNumber: 23
         }, this));
         // Empty MainView if there are no movies
-=======
-    render() {
-        const { movies , selectedMovie , user: user1  } = this.state;
-        if (!user1) return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_loginView.LoginView, {
-            onLoggedIn: (user)=>this.onLoggedIn(user)
-        }, void 0, false, {
-            fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 50,
-            columnNumber: 23
-        }, this));
->>>>>>> Stashed changes
         if (movies.length === 0) return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< Updated upstream
             lineNumber: 72,
             columnNumber: 37
         }, this));
         // If user is registered and logged in
         // Render list of MovieCard comps if no movie is selected
         // Go to MovieView if a movie is selected
-=======
-            lineNumber: 52,
-            columnNumber: 37
-        }, this));
->>>>>>> Stashed changes
         return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view",
             children: selectedMovie ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
@@ -22923,11 +22883,7 @@ class MainView extends _reactDefault.default.Component {
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< Updated upstream
                 lineNumber: 80,
-=======
-                lineNumber: 57,
->>>>>>> Stashed changes
                 columnNumber: 13
             }, this) : movies.map((movie)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
                     movie: movie,
@@ -22936,21 +22892,13 @@ class MainView extends _reactDefault.default.Component {
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 82,
-=======
-                    lineNumber: 59,
->>>>>>> Stashed changes
                     columnNumber: 13
                 }, this)
             )
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< Updated upstream
             lineNumber: 78,
-=======
-            lineNumber: 55,
->>>>>>> Stashed changes
             columnNumber: 7
         }, this));
     }
@@ -22961,11 +22909,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-<<<<<<< Updated upstream
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../registration-view/registration-view":"3U8r7"}],"jo6P5":[function(require,module,exports) {
-=======
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jo6P5":[function(require,module,exports) {
->>>>>>> Stashed changes
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -24537,12 +24481,9 @@ parcelHelpers.export(exports, "LoginView", ()=>LoginView
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-<<<<<<< Updated upstream
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _loginViewScss = require("./login-view.scss");
-=======
->>>>>>> Stashed changes
 var _s = $RefreshSig$();
 function LoginView(props) {
     _s();
@@ -24553,7 +24494,6 @@ function LoginView(props) {
         console.log(username, password);
         /* Send a request to the server for authentication */ props.onLoggedIn(username);
     };
-<<<<<<< Updated upstream
     const handleClickRegister = (e)=>{
         e.preventDefault();
         PerformancePaintTiming.toRegistrationView('');
@@ -24614,26 +24554,11 @@ function LoginView(props) {
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 38,
-=======
-    return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                children: [
-                    "Username:",
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        type: "text",
-                        value: username,
-                        onChange: (e)=>setUsername(e.target.value)
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 18,
->>>>>>> Stashed changes
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-<<<<<<< Updated upstream
                 lineNumber: 26,
                 columnNumber: 7
             }, this),
@@ -24653,64 +24578,29 @@ function LoginView(props) {
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 43,
-=======
-                lineNumber: 16,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                children: [
-                    "Password:",
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        type: "password",
-                        value: password,
-                        onChange: (e)=>setPassword(e.target.value)
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 22,
->>>>>>> Stashed changes
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-<<<<<<< Updated upstream
                 lineNumber: 41,
-=======
-                lineNumber: 20,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
-                type: "submit",
-                onClick: handleSubmit,
-                children: "Submit"
-            }, void 0, false, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 24,
->>>>>>> Stashed changes
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-<<<<<<< Updated upstream
         lineNumber: 23,
-=======
-        lineNumber: 15,
->>>>>>> Stashed changes
         columnNumber: 5
     }, this));
 }
 _s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
 _c = LoginView;
-<<<<<<< Updated upstream
 //prop-types
 //Give warnings in browser if data does not match required shape
 LoginView.propTypes = {
     onLoggedIn: _propTypesDefault.default.func.isRequired,
     toRegistrationView: _propTypesDefault.default.func.isRequired
 };
-=======
->>>>>>> Stashed changes
 var _c;
 $RefreshReg$(_c, "LoginView");
 
@@ -24719,11 +24609,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-<<<<<<< Updated upstream
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2","./login-view.scss":"e57ax"}],"gkKU3":[function(require,module,exports) {
-=======
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports) {
->>>>>>> Stashed changes
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -24873,55 +24759,7 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-<<<<<<< Updated upstream
 },{"react-refresh/runtime":"786KC"}],"7wKI2":[function(require,module,exports) {
-=======
-},{"react-refresh/runtime":"786KC"}],"bwuIu":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$67b2.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-class MovieCard extends _reactDefault.default.Component {
-    render() {
-        const { movie , onMovieClick  } = this.props;
-        return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-            className: "movie-card",
-            onClick: ()=>{
-                onMovieClick(movie);
-            },
-            children: movie.Title
-        }, void 0, false, {
-            fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 8,
-            columnNumber: 12
-        }, this));
-    }
-}
-MovieCard.propTypes = {
-    movie: _propTypesDefault.default.shape({
-        Title: _propTypesDefault.default.string
-    }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
-};
-
-  $parcel$ReactRefreshHelpers$67b2.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7wKI2":[function(require,module,exports) {
->>>>>>> Stashed changes
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -25615,7 +25453,6 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-<<<<<<< Updated upstream
 },{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"e57ax":[function() {},{}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -25663,9 +25500,6 @@ MovieCard.propTypes = {
   window.$RefreshSig$ = prevRefreshSig;
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"ggaUx":[function(require,module,exports) {
-=======
-},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"ggaUx":[function(require,module,exports) {
->>>>>>> Stashed changes
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -25679,24 +25513,11 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-<<<<<<< Updated upstream
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _movieViewScss = require("./movie-view.scss");
 var _image = require("react-bootstrap/esm/Image");
 class MovieView extends _reactDefault.default.Component {
-=======
-class MovieView extends _reactDefault.default.Component {
-    keypressCallback(event) {
-        console.log(event.key);
-    }
-    componentDidMount() {
-        document.addEventListener('keypress', this.keypressCallback);
-    }
-    componentWillUnmount() {
-        document.removeEventListener('keypress', this.keypressCallback);
-    }
->>>>>>> Stashed changes
     render() {
         const { movie , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25708,20 +25529,12 @@ class MovieView extends _reactDefault.default.Component {
                         src: movie.ImagePath
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                         lineNumber: 15,
-=======
-                        lineNumber: 23,
->>>>>>> Stashed changes
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 14,
-=======
-                    lineNumber: 22,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25732,11 +25545,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Title: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 18,
-=======
-                            lineNumber: 26,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -25744,21 +25553,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 19,
-=======
-                            lineNumber: 27,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 17,
-=======
-                    lineNumber: 25,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25769,11 +25570,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Description: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 22,
-=======
-                            lineNumber: 30,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -25781,21 +25578,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Description
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 23,
-=======
-                            lineNumber: 31,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 21,
-=======
-                    lineNumber: 29,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25806,11 +25595,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Series: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 26,
-=======
-                            lineNumber: 34,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -25818,21 +25603,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Series.Name
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 27,
-=======
-                            lineNumber: 35,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 25,
-=======
-                    lineNumber: 33,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25843,11 +25620,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Director: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 30,
-=======
-                            lineNumber: 38,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -25855,21 +25628,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Director.Name
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                             lineNumber: 31,
-=======
-                            lineNumber: 39,
->>>>>>> Stashed changes
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 29,
-=======
-                    lineNumber: 37,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
@@ -25879,26 +25644,17 @@ class MovieView extends _reactDefault.default.Component {
                     children: "Back"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
                     lineNumber: 33,
-=======
-                    lineNumber: 41,
->>>>>>> Stashed changes
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/movie-view/movie-view.jsx",
-<<<<<<< Updated upstream
             lineNumber: 13,
-=======
-            lineNumber: 21,
->>>>>>> Stashed changes
             columnNumber: 7
         }, this));
     }
 }
-<<<<<<< Updated upstream
 MovieView.propTypes = {
     moview: _image.propTypes.shape({
         Title: _propTypesDefault.default.string.isRequired,
@@ -25919,15 +25675,12 @@ MovieView.propTypes = {
     }).isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
 };
-=======
->>>>>>> Stashed changes
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-<<<<<<< Updated upstream
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2","./movie-view.scss":"jnlR5","react-bootstrap/esm/Image":"cyVPa"}],"jnlR5":[function() {},{}],"cyVPa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -27029,8 +26782,5 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshSig$ = prevRefreshSig;
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./registration-view.scss":"clIxH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"clIxH":[function() {},{}],"lJZlQ":[function() {},{}]},["kn9T2","1SYPb","d8Dch"], "d8Dch", "parcelRequire00f4")
-=======
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["kn9T2","1SYPb","d8Dch"], "d8Dch", "parcelRequire00f4")
->>>>>>> Stashed changes
 
 //# sourceMappingURL=index.js.map
