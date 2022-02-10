@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Form, Button, Row, Col, Container, Card, CardGroup } from 'react-bootstrap';
 
 import './login-view.scss';
+import axios from 'axios';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -14,37 +16,76 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  /* const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('https://superflix-db.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self');
+      })
+      .catch(e => {
+        console.log('error logging in the user');
+        alert('Something wasn\'t entered right');
+      });
+    }; */
+
   const handleClickRegister = (e) => {
     e.preventDefault();
-    PerformancePaintTiming.toRegistrationView('');
+    props.toRegistrationView('');
   }
 
   return (
-    <div className="login-view">
-      <h2> Login to SuperFlix</h2>
+    <Container>
+      <Row>
+        <Col>
+          <CardGroup>
+            <Card>
+              <Card.Body>
+                <Card.Title>Login to SuperFlix</Card.Title>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Username:</Form.Label>
+                      <Form.Control 
+                        type="text" 
+                        onChange={e => setUsername(e.target.value)} 
+                        required
+                        placeholder="Enter your username"
+                      />
+                  </Form.Group>
 
-      <form className="login-form">
+                  <Form.Group>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control 
+                      type="text" 
+                      onChange={e => setPassword(e.target.value)} 
+                      required
+                      placeholder="Enter your password"
+                    />
+                  </Form.Group>
 
-        <label>
-          Username:
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        </label>
+                  <Button variant="primary" type="submit" 
+                    onClick={handleSubmit}>
+                    Log In
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Col>
+      </Row>
 
-        <label>
-          Password:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </label>
-
-        <button type="submit" onClick={handleSubmit}>Log In</button>
-      </form>
-
-      <div>
-        <span>New User? </span>
-        <button type="submit" onClick={handleClickRegister}>Register</button>
-      </div>
-
-    </div>
-  )
+      <Row className="register-row">
+            <p>New user?</p>
+          <Col>
+            <Button variant="secondary" type="submit" onClick={handleClickRegister}>Register</Button>
+          </Col>
+        </Row>
+    </Container>
+  );
 }
 
 //prop-types
