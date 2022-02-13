@@ -67,7 +67,7 @@ export function LoginView(props) {
                     />
                   </Form.Group>
 
-                  <Button variant="primary" type="submit" 
+                  <Button variant="success" type="submit" 
                     onClick={handleSubmit}>
                     Log In
                   </Button>
@@ -79,9 +79,9 @@ export function LoginView(props) {
       </Row>
 
       <Row className="register-row">
+        <Col>
             <p>New user?</p>
-          <Col>
-            <Button variant="secondary" type="submit" onClick={handleClickRegister}>Register</Button>
+            <Button variant="outline-secondary" type="submit" onClick={handleClickRegister}>Register</Button>
           </Col>
         </Row>
     </Container>
