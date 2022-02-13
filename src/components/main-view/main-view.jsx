@@ -6,7 +6,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { NavbarView } from '../navbar-view/navbar-view';
+// import { NavbarView } from '../navbar-view/navbar-view';
 
 export class MainView extends React.Component {
 
@@ -77,26 +77,20 @@ export class MainView extends React.Component {
     // Render list of MovieCard comps if no movie is selected
     // Go to MovieView if a movie is selected
     return (
-      <div className="main-view">
+      <Row className="main-view justify-content-md-center">
         {selectedMovie
           ? (
-            <Row className="justify-content-md-center">
-              <Col md={8}>
-                <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-              </Col>
-            </Row>
+            <Col md={8}>
+              <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+            </Col>
           )
-          : (
-            <Row className="justify-content-md-center">
-              {movies.map(movie => (
-                <Col md={3}>
-                  <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
-                </Col>
-              ))}
-            </Row>
-          )
+          : movies.map(movie => (
+            <Col md={3}>
+              <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+            </Col>
+          ))
         }
-      </div>
+      </Row>
     );
   }
 }
