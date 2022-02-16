@@ -1,49 +1,46 @@
 import React from 'react';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import * as ReactBootStrap from "react-bootstrap";
+import {
+    BrowserRouter as Router,
+    Link
+  } from "react-router-dom";
 
-import './navbar-view.scss';
-
-export function NavbarView({user}) {
-  const onLoggedOut = () => {
-    localStorage.clear();
-    window.open('/', '_self');
-  };
-
-  const isAuth = () => {
-    if (typeof window == "undefined") {
-      return false;
-    }
-    if (localStorage.getItem("token")) {
-      return localStorage.getItem("token");
-    } else {
-      return false;
-    }
-  };
-
-  return (
-    <Navbar className="main-nav" sticky="top" expand="lg" variant="dark">
-      <Container fluid>
-        <Navbar.Brand className="navbar-logo" href="/">SuperFlix</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
-            {isAuth() && (
-              <Nav.Link href="/profile">{user}</Nav.Link>
-            )}
-            {isAuth() && (
-              <Button variant="link" onClick={() => {
-                onLoggedOut()
-              }}>Logout</Button>
-            )}
-            {!isAuth() && (
-              <Nav.Link href="/">Login</Nav.Link>
-            )}
-            {!isAuth() && (
-              <Nav.Link href="/register">Register</Nav.Link>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
+const NavBar = () => {
+    return(
+        <div className="App">
+    <ReactBootStrap.Navbar collapseOnSelect expand="xl" bg="danger" variant="dark">
+  <ReactBootStrap.Navbar.Brand href="#home">THICC BOIS HOURS</ReactBootStrap.Navbar.Brand>
+  <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
+    <ReactBootStrap.Nav className="mr-auto"> 
+    <Link to="/features">
+    <ReactBootStrap.Nav.Link href="#features">Features</ReactBootStrap.Nav.Link>
+    </Link>
+    <Link to="/pricing">
+    <ReactBootStrap.Nav.Link href="#pricing">Pricing</ReactBootStrap.Nav.Link>
+    </Link>
+      <ReactBootStrap.NavDropdown title="YEET" id="collasible-nav-dropdown">
+        <ReactBootStrap.NavDropdown.Item href="#action/3.1">Action</ReactBootStrap.NavDropdown.Item>
+        <ReactBootStrap.NavDropdown.Item href="#action/3.2">Another action</ReactBootStrap.NavDropdown.Item>
+        <ReactBootStrap.NavDropdown.Item href="#action/3.3">Something</ReactBootStrap.NavDropdown.Item>
+        <ReactBootStrap.NavDropdown.Divider />
+        <ReactBootStrap.NavDropdown.Item href="#action/3.4">Separated link</ReactBootStrap.NavDropdown.Item>
+      </ReactBootStrap.NavDropdown>
+    </ReactBootStrap.Nav>
+    <ReactBootStrap.Nav>
+    <Link to="/deets">
+    <ReactBootStrap.Nav.Link href="#deets">More deets</ReactBootStrap.Nav.Link>
+    </Link>
+    <Link to="/dankmemes">
+    <ReactBootStrap.Nav.Link eventKey={2} href="#memes">
+        Dank memes
+      </ReactBootStrap.Nav.Link>
+    </Link>
+    </ReactBootStrap.Nav>
+  </ReactBootStrap.Navbar.Collapse>
+</ReactBootStrap.Navbar>
+        </div>
+    )
 }
+
+export default NavBar;

@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Navbar, Nav, Container } from 'react-bootstrap';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-// import { NavbarView } from '../navbar-view/navbar-view';
+//import { NavbarView } from '../navbar-view/navbar-view';
+
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -62,6 +64,7 @@ export class MainView extends React.Component {
   }
 
   render() {
+
     const { movies, selectedMovie, user, registered } = this.state;
 
     // RegistrationView if user is not registered
@@ -77,20 +80,41 @@ export class MainView extends React.Component {
     // Render list of MovieCard comps if no movie is selected
     // Go to MovieView if a movie is selected
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={8}>
-              <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-            </Col>
-          ))
-        }
-      </Row>
+      <div className="main-view">
+        <Navbar expand="lg" bg="dark" variant="dark" className="mainNavbar">
+          <Container>
+            <Navbar.Brand href="#superflix">
+              <img
+                src="/Users/katymolony/myProjects/superFlix-client/src/img/SuperFlixLogo.svg"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                alt="SuperFlix logo"
+              />
+            </Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="#profile">Profile</Nav.Link>
+              <Nav.Link href="#logout">Logout</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+
+        <Row className="main-view justify-content-md-center">
+          {selectedMovie
+            ? (
+              <Col md={8}>
+                <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+              </Col>
+            )
+            : movies.map(movie => (
+              <Col md={3}>
+                <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+              </Col>
+            ))
+          }
+        </Row>
+      </div>
     );
   }
 }
+

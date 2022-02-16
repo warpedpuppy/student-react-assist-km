@@ -23,34 +23,36 @@ export class MovieView extends React.Component {
 
     return (
       <Row className="movie-view">
-        <Col lg={4}>
-          <div className="movie-poster">
-            <img src={movie.ImagePath} />
-          </div>
-        </Col>
+        <Col>
+          <CardGroup>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" type="fluid" src= {movie.ImagePath} />
+              <Card.Body>
+                <Card.Title>{movie.Title}</Card.Title>
+                <Card.Text>
+                  <div className="movie-view_line description">
+                    <span className="movie-view_line_label">Description: </span>
+                    <span className="movie-view_line_value">{movie.Description}</span>
+                  </div>
 
-        <Col lg={8}>
-          <div className="movie-view_title-line">
-            <Button id="back-button" onClick={() => { onBackClick(null); }}></Button>
-            <span className="movie-view_title">{movie.Title}</span>
-            <Button id="favorite-button" ></Button>
-            <span className="value">{movie.Title}</span>
-          </div>
+                  <div className="movie-series">
+                    <span className="label">Series: </span>
+                    <span className="value">{movie.Series.Name}</span>
+                  </div>
 
-          <div className="movie-view_line description">
-            <span className="movie-view_line_label">Description: </span>
-            <span className="movie-view_line_value">{movie.Description}</span>
-          </div>
+                  <div className="movie-director">
+                    <span className="label">Director: </span>
+                    <span className="value">{movie.Director.Name}</span>
+                  </div>
 
-          <div className="movie-series">
-            <span className="label">Series: </span>
-            <span className="value">{movie.Series.Name}</span>
-          </div>
-
-          <div className="movie-director">
-            <span className="label">Director: </span>
-            <span className="value">{movie.Director.Name}</span>
-          </div>
+                  <div>
+                    <Button onClick={() => { onBackClick(null); }} variant="outline-primary">Back</Button>
+                    <Button variant="outline-success" >Favorite</Button>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </CardGroup>
         </Col>
       </Row>
     );
