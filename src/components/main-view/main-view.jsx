@@ -6,7 +6,6 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-//import { NavbarView } from '../navbar-view/navbar-view';
 
 import './main-view.scss';
 
@@ -81,13 +80,13 @@ export class MainView extends React.Component {
     // Go to MovieView if a movie is selected
     return (
       <div className="main-view">
-        <Navbar expand="lg" bg="dark" variant="dark" className="mainNavbar">
+        <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
           <Container>
             <Navbar.Brand href="#superflix">
               <img
-                src="/Users/katymolony/myProjects/superFlix-client/src/img/SuperFlixLogo.svg"
-                width="30"
-                height="30"
+                src="/SFLogo.png"
+                width="24"
+                height="12"
                 className="d-inline-block align-top"
                 alt="SuperFlix logo"
               />
