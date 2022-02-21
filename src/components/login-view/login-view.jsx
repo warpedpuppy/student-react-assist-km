@@ -11,27 +11,19 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    props.onLoggedIn(username);
-  };
-
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
     axios.post('https://superflix-db.herokuapp.com/login', {
       Username: username,
       Password: password
     })
       .then(response => {
         const data = response.data;
-        console.log(data);
-        window.open('/', '_self');
+        props.onLoggedIn(data);
       })
       .catch(e => {
-        console.log('error logging in the user');
+        console.log('no such user');
         alert('Something wasn\'t entered right');
       });
-    }; */
+    };
 
   const handleClickRegister = (e) => {
     e.preventDefault();
