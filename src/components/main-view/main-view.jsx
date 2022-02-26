@@ -22,7 +22,7 @@ export class MainView extends React.Component {
   }
 
   //load in movies from my database after rendering MainView
-  componentDidMount() {
+  /*componentDidMount() {
     axios.get('https://superflix-db.herokuapp.com/movies')
       .then(response => {
         this.setState({
@@ -32,6 +32,21 @@ export class MainView extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  } */
+
+  getMovies(token) {
+    axios.get('https://superflix-db.herokuapp.com/movies', {
+      headers: { Authorization: 'Bearer ${token}'}
+    })
+    .then(response => {
+      //Assign the result to the state
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   // Passed to MovieCard
@@ -41,12 +56,24 @@ export class MainView extends React.Component {
     });
   }
 
-  // Passed to LoginView
-  onLoggedIn(user) {
+    /* Passed to LoginView
+    onLoggedIn(user) {
+      this.setState({
+        user
+      });
+    } */
+
+  //Passed to LoginView
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
-    });
-  }
+      user: authData.user.Username
+    }); 
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  } 
 
   // Passed to RegistrationView
   onRegister(registered, user) {
