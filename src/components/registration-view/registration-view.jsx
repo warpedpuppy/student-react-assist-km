@@ -1,33 +1,72 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
-
-import './registration-view.scss';
 import axios from 'axios';
+import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+// import { Link } from "react-router-dom";
+import './registration-view.scss';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+  //Declare hook for each required input
+  const [values, setValues] = useState({
+    usernameErr: '',
+    passwordErr: '',
+    emailErr: '',
+  });
 
+  // validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if(!username){
+      setValues({...values, usernameErr: 'Username Required'});
+      isReq = false;
+    } else if (username.length < 5) {
+      setValues({...values, usernameErr: 'Username must be at least 5 characters long'})
+      isReq = false;
+    }
+    if(!password){
+      setValues({...values, passwordErr: 'Password Required'});
+      isReq = false;
+    } else if(password.length < 6){
+      setValues({...values, passwordErr: 'Password must be at least 6 characters long'})
+      isReq = false;
+    }
+    if(!email) {
+      setValues({...values, emailErr: 'Email required'});
+      isReq = false;
+    } else if(email.indexOf('@') === -1) {
+      setValues({...values, emailErr: 'Email is invalid'});
+      isReq = false;
+    }
+
+    return isReq;
+  }
+
+  //Assign variable isReq to validate function
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://superflix-db.herokuapp.com/users', {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    })
+    const isReq = validate();
+    if(isReq){
+      axios.post('https://superflix-db.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
       .then(response => {
         const data = response.data;
         console.log(data);
+        alert('Registration successful, please login!');
         window.open('/', '_self');
       })
-      .catch(e => {
-        console.log('error registering the user');
-        alert('Something wasn\'t entered right');
+      .catch(response => {
+        console.error(response);
+        alert('unable to register');
       });
+    }
   };
 
   return (
@@ -48,6 +87,7 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter a username"
                     />
+                    {values.usernameErr && <p>{values.usernameErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -57,9 +97,10 @@ export function RegistrationView(props) {
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       required
-                      minLength="8"
+                      minLength="6"
                       placeholder='Your password must be 6 or more characters'
                     />
+                    {values.passwordErr && <p>{values.passwordErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -71,6 +112,7 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter your email address"
                     />
+                    {values.emailErr && <p>{values.emailErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -87,6 +129,7 @@ export function RegistrationView(props) {
                     onClick={handleSubmit}>
                     Register
                   </Button>
+                  <p></p>
                 </Form>
               </Card.Body>
             </Card>
@@ -98,6 +141,11 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired
+  onRegister: PropTypes.func.isRequired,
+  /* register: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }), */
 };
 

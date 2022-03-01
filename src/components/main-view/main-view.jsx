@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Row, Col, Navbar, Nav, Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
@@ -8,6 +9,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
 import './main-view.scss';
+import { Router } from 'react-router-dom';
 
 export class MainView extends React.Component {
 
@@ -22,7 +24,7 @@ export class MainView extends React.Component {
   }
 
   //load in movies from my database after rendering MainView
-  /*componentDidMount() {
+  /* componentDidMount() {
     axios.get('https://superflix-db.herokuapp.com/movies')
       .then(response => {
         this.setState({
@@ -36,7 +38,7 @@ export class MainView extends React.Component {
 
   getMovies(token) {
     axios.get('https://superflix-db.herokuapp.com/movies', {
-      headers: { Authorization: 'Bearer ${token}'}
+      headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
       //Assign the result to the state
@@ -48,6 +50,17 @@ export class MainView extends React.Component {
       console.log(error);
     });
   }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  } 
+
 
   // Passed to MovieCard
   setSelectedMovie(movie) {
@@ -89,6 +102,16 @@ export class MainView extends React.Component {
     });
   }
 
+  // To log out
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user:null
+    });
+  }
+
+
   render() {
 
     const { movies, selectedMovie, user, registered } = this.state;
@@ -111,17 +134,17 @@ export class MainView extends React.Component {
           <Container>
             <Navbar.Brand href="#superflix">
               <img
-                src="/SFLogo.png"
-                width="24"
-                height="12"
+                src="https://superflix-db.herokuapp.com/img/SuperFlixLogo.svg"
+                width="150"
+                height="75"
                 className="d-inline-block align-top"
                 alt="SuperFlix logo"
               />
             </Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="#profile">Profile</Nav.Link>
-              <Nav.Link href="#logout">Logout</Nav.Link>
             </Nav>
+            <button onClick={() => { this.onLoggedOut()}}>Logout</button>
           </Container>
         </Navbar>
 
