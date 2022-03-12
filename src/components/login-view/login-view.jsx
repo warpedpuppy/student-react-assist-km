@@ -1,36 +1,57 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col, Container, Card, CardGroup } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 import './login-view.scss';
 import axios from 'axios';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  //Declare hook for each input
+  const [ usernameErr, setUsernameErr ] = useState('');
+  const [ passwordErr, setPasswordErr ] = useState('');
 
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username)
-  }; */
+  // validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if(!username){
+      setUsernameErr('Username Required');
+      isReq = false;
+    }else if(username.length < 2){
+      setUsernameErr('Username must be at least 2 characters long');
+      isReq = false;
+    }
+    if(!password){
+      setPasswordErr('Password Required');
+      isReq = false;
+    }else if(password.length < 6){
+      setPassword('Password must be at least 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* Send a request to the server for authentication */
-    axios.post('https://superflix-db.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('no such user');
-      alert('Something wasn\'t entered right');
-    });
-  }; 
+    const isReq = validate();
+    if(isReq) {
+      /* Send a request to the server for authentication */
+      axios.post('https://superflix-db.herokuapp.com/login', {
+        Username: username,
+        Password: password
+      })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user');
+        alert('Something wasn\'t entered right');
+      });
+    }
+  };
 
   const handleClickRegister = (e) => {
     e.preventDefault();
@@ -46,7 +67,7 @@ export function LoginView(props) {
               <Card.Body>
                 <Card.Title>Login to SuperFlix</Card.Title>
                 <Form>
-                  <Form.Group>
+                  <Form.Group controlId="formUsername">
                     <Form.Label>Username:</Form.Label>
                       <Form.Control 
                         type="text"
@@ -55,9 +76,10 @@ export function LoginView(props) {
                         required
                         placeholder="Enter your username"
                       />
+                      {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
-                  <Form.Group>
+                  <Form.Group controlId="formPassword">
                     <Form.Label>Password:</Form.Label>
                     <Form.Control 
                       type="password"
@@ -66,6 +88,7 @@ export function LoginView(props) {
                       required
                       placeholder="Enter your password"
                     />
+                    {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
 
                   <Button variant="success" type="submit" 
@@ -82,7 +105,7 @@ export function LoginView(props) {
       <Row className="register-row">
         <Col>
             <p>New user?</p>
-            <Button variant="outline-secondary" type="submit" onClick={handleClickRegister}>Register</Button>
+            <Button variant="secondary" type="submit" onClick={handleClickRegister}>Register</Button>
           </Col>
         </Row>
     </Container>
@@ -93,5 +116,5 @@ export function LoginView(props) {
 //Give warnings in browser if data does not match required shape
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
-  toRegistrationView: PropTypes.func.isRequired
+  toRegistrationView: PropTypes.func
 };
