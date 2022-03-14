@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 import './registration-view.scss';
+//import { Link } from 'react-router-dom'
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -10,34 +11,33 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   //Declare hook for each required input
-  const [values, setValues] = useState({
-    usernameErr: '',
-    passwordErr: '',
-    emailErr: '',
-  });
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
   // validate user inputs
   const validate = () => {
     let isReq = true;
+
     if(!username){
-      setValues({...values, usernameErr: 'Username Required'});
+      setUsernameErr('Username required');
       isReq = false;
     } else if (username.length < 5) {
-      setValues({...values, usernameErr: 'Username must be at least 5 characters long'})
+      setUsernameErr('Username must be at least 5 characters long');
       isReq = false;
     }
     if(!password){
-      setValues({...values, passwordErr: 'Password Required'});
+      setPasswordErr('Password required');
       isReq = false;
     } else if(password.length < 6){
-      setValues({...values, passwordErr: 'Password must be at least 6 characters long'})
+      setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
     if(!email) {
-      setValues({...values, emailErr: 'Email required'});
+      setEmailErr('Email required');
       isReq = false;
     } else if(email.indexOf('@') === -1) {
-      setValues({...values, emailErr: 'Email is invalid'});
+      setEmailErr('Email must be valid');
       isReq = false;
     }
 
@@ -69,7 +69,7 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Container>
+    //<Container>
       <Row>
         <Col>
           <CardGroup>
@@ -86,7 +86,7 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter a username"
                     />
-                    {values.usernameErr && <p>{values.usernameErr}</p>}
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -99,7 +99,7 @@ export function RegistrationView(props) {
                       minLength="6"
                       placeholder='Your password must be 6 or more characters'
                     />
-                    {values.passwordErr && <p>{values.passwordErr}</p>}
+                    {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -111,7 +111,7 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter your email address"
                     />
-                    {values.emailErr && <p>{values.emailErr}</p>}
+                    {emailErr && <p>{emailErr}</p>}
                   </Form.Group>
 
                   <Form.Group>
@@ -128,23 +128,22 @@ export function RegistrationView(props) {
                     onClick={handleSubmit}>
                     Register
                   </Button>
-                  <p></p>
                 </Form>
               </Card.Body>
             </Card>
           </CardGroup>
         </Col>
       </Row>
-    </Container>
+    //</Container>
   );
 }
 
 RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired,
-  /* register: PropTypes.shape({
+  register: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired
-  }), */
+  })
+  //onRegister: PropTypes.func.isRequired,
 };
 

@@ -8,6 +8,7 @@ import axios from 'axios';
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   //Declare hook for each input
   const [ usernameErr, setUsernameErr ] = useState('');
   const [ passwordErr, setPasswordErr ] = useState('');
@@ -15,6 +16,7 @@ export function LoginView(props) {
   // validate user inputs
   const validate = () => {
     let isReq = true;
+
     if(!username){
       setUsernameErr('Username Required');
       isReq = false;
@@ -53,13 +55,8 @@ export function LoginView(props) {
     }
   };
 
-  const handleClickRegister = (e) => {
-    e.preventDefault();
-    props.toRegistrationView('');
-  } 
-
   return (
-    <Container>
+    // <Container className="profile-view" align="center">
       <Row>
         <Col>
           <CardGroup>
@@ -95,26 +92,25 @@ export function LoginView(props) {
                     onClick={handleSubmit}>
                     Log In
                   </Button>
+                  <Link to="/register"> 
+                    <Button variant="secondary">Register now</Button>
+                  </Link>
                 </Form>
               </Card.Body>
             </Card>
           </CardGroup>
         </Col>
       </Row>
-
-      <Row className="register-row">
-        <Col>
-            <p>New user?</p>
-            <Button variant="secondary" type="submit" onClick={handleClickRegister}>Register</Button>
-          </Col>
-        </Row>
-    </Container>
+    //</Container>
   );
 }
 
 //prop-types
 //Give warnings in browser if data does not match required shape
 LoginView.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  }),
   onLoggedIn: PropTypes.func.isRequired,
-  toRegistrationView: PropTypes.func
 };

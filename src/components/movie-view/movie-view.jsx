@@ -24,7 +24,7 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Container fluid>
+      //<Container fluid>
         <Row>
           <Col>
             <CardGroup>
@@ -63,12 +63,12 @@ export class MovieView extends React.Component {
             </CardGroup>
           </Col>
         </Row>
-      </Container>
+      //</Container>
     );
   }
 }
 
-MovieView.propTypes = {
+/* MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
@@ -87,4 +87,4 @@ MovieView.propTypes = {
     })
   }).isRequired,
   onBackClick: PropTypes.func.isRequired 
-};
+}; */
