@@ -22,7 +22,7 @@ export function NavbarView({user}) {
   };
 
   return (
-    <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
+    <Navbar sticky="top" expand="lg" variant="light" className="mainNavbar">
       <Container fluid>
         <Navbar.Brand className="navbar-logo" href="/">
           <img

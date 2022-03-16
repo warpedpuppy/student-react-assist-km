@@ -41786,7 +41786,7 @@ function NavbarView({ user  }) {
     return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Navbar, {
         sticky: "top",
         expand: "lg",
-        variant: "dark",
+        variant: "light",
         className: "mainNavbar",
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Container, {
             fluid: true,
