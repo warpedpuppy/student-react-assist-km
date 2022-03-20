@@ -54,10 +54,11 @@ export class MainView extends React.Component {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       this.setState({
-        user:null
+        user:null,
       });
+      window.open('/', '_self');
     }
-
+    
     getMovies(token) {
       axios.get('https://superflix-db.herokuapp.com/movies', {
           headers: { Authorization: `Bearer ${token}`}

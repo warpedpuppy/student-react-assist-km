@@ -35,7 +35,7 @@ export class ProfileView extends React.Component {
   getUser = (token) => {
     const Username = localStorage.getItem('user');
     axios
-      .get(`https://superflix-db.herokuapp.com/user/${Username}`, {
+      .get(`https://superflix-db.herokuapp.com/users/${Username}`, {
         headers: { Authorization: `Bearer ${token}`},
       })
       .then((response) => {
@@ -157,7 +157,7 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, EMail, Birthday } = this.state;
+    const { FavoriteMovies, Username, Email, Birthday } = this.state;
 
     if (!Username) {
       return null;
