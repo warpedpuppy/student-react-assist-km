@@ -27,16 +27,15 @@ export class ProfileView extends React.Component {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
-      user:null,
+      user: null,
     });
     window.open('/', '_self');
   }
 
   getUser = (token) => {
     const Username = localStorage.getItem('user');
-    axios
-      .get(`https://superflix-db.herokuapp.com/users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}`},
+    axios.get(`https://superflix-db.herokuapp.com/users/${Username}`, {
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         this.setState({
@@ -51,16 +50,14 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   };
+
   //Allow user to edit or update profile
   editUser = (e) => {
     e.preventDefault();
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios
-      .put(
-        `https://superflix-db.herokuapp.com/users/${Username}`,
-        {
+    axios.put(`https://superflix-db.herokuapp.com/users/${Username}`, {
           Username: this.state.Username,
           Password: this.state.Password,
           Email: this.state.Email,
@@ -93,11 +90,8 @@ export class ProfileView extends React.Component {
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios
-      .delete(
-        `https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`,
-        {
-          headers: { Authorization: `Bearer %{token}` },
+    axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((response) => {
@@ -115,8 +109,7 @@ export class ProfileView extends React.Component {
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios
-      .delete(`https://superflix-db.herokuapp.com/users/${Username}`, {
+    axios.delete(`https://superflix-db.herokuapp.com/users/${Username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -244,7 +237,7 @@ export class ProfileView extends React.Component {
         <Row>
           <Col>
             <Card.Body>
-              {FavoriteMovies.length > 0 && (
+              {FavoriteMovies.length === 0 && (
                 <div className="text-center">No Favorite Movies</div>
               )}
               <Row className="favorite-container">
@@ -261,7 +254,7 @@ export class ProfileView extends React.Component {
                           variant="top"
                           src={movie.ImagePath}
                         />
-                        <Card.Body style={{ backgroundColor: 'black' }}>
+                        <Card.Body style={{ backgroundColor: "black" }}>
                           <Card.Title className="movie_title">
                             {movie.Title}
                           </Card.Title>
@@ -278,7 +271,6 @@ export class ProfileView extends React.Component {
         <div className="backButton">
           <Button variant="outline-primary" onClick={() => { onBackClick(null); }}>Back</Button>
         </div>
-        <br />
       </Container>
     );
   }
