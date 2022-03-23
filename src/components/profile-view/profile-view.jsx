@@ -160,7 +160,7 @@ export class ProfileView extends React.Component {
       <Container className="profile-view" align="center">
         <Row>
           <Col>
-            <Card classname="update-profile">
+            <Card className="update-profile">
               <Card.Body>
                 <Card.Title>Profile</Card.Title>
                 <Form
@@ -248,7 +248,7 @@ export class ProfileView extends React.Component {
                     FavoriteMovies.find((fav) => fav === movie._id)
                   ) {
                     return (
-                      <Card classname="favorite-movie card-content" key={movie._id} >
+                      <Card className="favorite-movie card-content" key={movie._id} >
                         <Card.Img
                           className="fav-poster"
                           variant="top"
