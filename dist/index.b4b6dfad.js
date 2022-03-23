@@ -41491,7 +41491,7 @@ class ProfileView extends _reactDefault.default.Component {
             FavoriteMovies: []
         };
     }
-    conponentDidMount() {
+    componentDidMount() {
         const accessToken = localStorage.getItem('token');
         this.getUser(accessToken);
     }

@@ -18,7 +18,7 @@ export class ProfileView extends React.Component {
     };
   }
 
-  conponentDidMount() {
+  componentDidMount() {
     const accessToken = localStorage.getItem('token');
     this.getUser(accessToken);
   }
