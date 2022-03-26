@@ -41533,13 +41533,13 @@ class ProfileView extends _reactDefault.default.Component {
             Birthday: this.state.Birthday
         }, {
             headers: {
-                Authorization: `Bearer &{token}`
+                Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             this.setState({
                 Username: response.data.Username,
                 Password: response.data.Password,
-                EMail: response.data.Email,
+                Email: response.data.Email,
                 Birthday: response.data.Birthday
             });
             localStorage.setItem('user', this.state.Username);
@@ -41606,7 +41606,7 @@ class ProfileView extends _reactDefault.default.Component {
     }
     render() {
         const { movies , onBackClick  } = this.props;
-        const { FavoriteMovies , Username , Email , Birthday  } = this.state;
+        const { FavoriteMovies , Username , Email , Birthday , Password  } = this.state;
         if (!Username) return null;
         return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Container, {
             className: "profile-view",
@@ -41671,7 +41671,7 @@ class ProfileView extends _reactDefault.default.Component {
                                                         type: "password",
                                                         name: "Password",
                                                         placeholder: "New Password",
-                                                        value: "",
+                                                        value: Password,
                                                         onChange: (e)=>this.setPassword(e.target.value)
                                                         ,
                                                         required: true

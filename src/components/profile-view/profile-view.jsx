@@ -64,14 +64,14 @@ export class ProfileView extends React.Component {
           Birthday: this.state.Birthday,
         },
         {
-          headers: { Authorization: `Bearer &{token}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((response) => {
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
-          EMail: response.data.Email,
+          Email: response.data.Email,
           Birthday: response.data.Birthday,
         });
 
@@ -150,7 +150,7 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday } = this.state;
+    const { FavoriteMovies, Username, Email, Birthday, Password } = this.state;
 
     if (!Username) {
       return null;
@@ -193,7 +193,7 @@ export class ProfileView extends React.Component {
                       type="password"
                       name="Password"
                       placeholder="New Password"
-                      value={""}
+                      value={Password}
                       onChange={(e) => this.setPassword(e.target.value)}
                       required
                     />
