@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import './profile-view.scss';
-import { Link } from 'react-router-dom';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 
 export class ProfileView extends React.Component {
@@ -40,7 +39,7 @@ export class ProfileView extends React.Component {
       .then((response) => {
         this.setState({
           Username: response.data.Username,
-          Password: response.data.Password,
+          Password: "",
           Email: response.data.Email,
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
@@ -221,7 +220,7 @@ export class ProfileView extends React.Component {
                     />
                   </Form.Group>
                   <div className="mt-3">
-                    <Button variant="success" type="submit" onClick={this.editUser}>Update User</Button>
+                    <Button variant="warning" type="submit" onClick={this.editUser}>Update User</Button>
                     <Button className="ml-3" variant="secondary" onClick={() => this.onDeleteUser()}>Delete User</Button>
                   </div>
                 </Form>
@@ -269,7 +268,7 @@ export class ProfileView extends React.Component {
           </Col>
         </Row>
         <div className="backButton">
-          <Button variant="outline-primary" onClick={() => { onBackClick(null); }}>Back</Button>
+          <Button variant="dark" onClick={() => { onBackClick(null); }}>Back</Button>
         </div>
       </Container>
     );

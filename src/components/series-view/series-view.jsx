@@ -24,7 +24,7 @@ export class SeriesView extends React.Component {
               <span className="value">{series.Description}</span>
             </Card.Text>
 
-            <Button variant="outline-light" onClick={() => { onBackClick(); }}>Back</Button>
+            <Button variant="dark" onClick={() => { onBackClick(); }}>Back</Button>
           </Card.Body>
         </Card>
         <Row>
