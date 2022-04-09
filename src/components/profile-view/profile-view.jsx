@@ -159,15 +159,6 @@ export class ProfileView extends React.Component {
       <Container className="profile-view" align="center">
         <Row>
           <Col>
-            {/* <Card className="user-info">
-              <Card.Body>
-                <Card.Title>User Info</Card.Title>
-                  <p>User: {user.Username}</p>
-                  <p>Email: {user.Email}</p> 
-                  <p>Birthday: {user.birthday}</p>
-              </Card.Body>
-
-            </Card> */}
             <Card className="update-profile">
               <Card.Body>
                 <Card.Title>Profile</Card.Title>
