@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -14,6 +15,7 @@ export class ProfileView extends React.Component {
       Email: null,
       Birthday: null,
       FavoriteMovies: [],
+      modalState: false
     };
   }
 
@@ -40,7 +42,7 @@ export class ProfileView extends React.Component {
         this.setState({
           Username: response.data.Username,
           Password: "",
-          Email: response.data.Email,
+          Email: "",
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
         });
@@ -103,6 +105,16 @@ export class ProfileView extends React.Component {
       });
   };
 
+  // Show the modal to confirm you want to delete a user profile
+  showModal() {
+    this.setState({ modalState: true })
+  };
+
+  // Close the modal that confirms you want to delete a user profile
+  closeModal() {
+    this.setState({ modalState: false })
+  };
+
   //Deregister
   onDeleteUser() {
     const Username = localStorage.getItem('user');
@@ -157,8 +169,32 @@ export class ProfileView extends React.Component {
 
     return (
       <Container className="profile-view" align="center">
+        {/* Modal specification which will display when attempting to delete a user */}
+        <Modal show={this.state.modalState} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to delete your user profile?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Once a user profile has been deleted, there is no way to restore it.  Are you sure you wish to continue?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.closeModal}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={this.onDeleteUser}>
+              Delete Profile
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Row>
           <Col>
+            <Card className="show-profile">
+              <Card.Body>
+                <Card.Title className="text-center">Profile of {Username}</Card.Title>
+                <Card.Text><span className="profile_heading">Email: </span>{Email} </Card.Text>
+                {Birthday && (
+                  <Card.Text><span className="profile_heading">Birthday: </span>{Intl.DateTimeFormat().format(new Date(Birthday))} </Card.Text>
+                )}
+              </Card.Body>
+            </Card>
             <Card className="update-profile">
               <Card.Body>
                 <Card.Title>Profile</Card.Title>
@@ -221,7 +257,7 @@ export class ProfileView extends React.Component {
                   </Form.Group>
                   <div className="mt-3">
                     <Button variant="warning" type="submit" onClick={this.editUser}>Update User</Button>
-                    <Button className="ml-3" variant="secondary" onClick={() => this.onDeleteUser()}>Delete User</Button>
+                    <Button className="ml-3" variant="secondary" onClick={() => this.showModal()}>Delete User</Button>
                   </div>
                 </Form>
               </Card.Body>
