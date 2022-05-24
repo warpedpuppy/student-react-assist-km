@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { Row, Col, Button, Card, CardGroup, Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { updateUser, setUser } from '../../actions/actions';
+import { connect } from 'react-redux';
 
 import './movie-view.scss';
 
@@ -17,8 +19,9 @@ export class MovieView extends React.Component {
     }
 
     //Bind these additional functions that will get called by onClick events to 'this'
-    this.addFavorite = this.addFavorite.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
+    // this.addFavorite = this.addFavorite.bind(this);
+    // this.removeFavorite = this.removeFavorite.bind(this);
+    // this.getUser = this.getUser.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +47,7 @@ export class MovieView extends React.Component {
     const token = localStorage.getItem('token');
     axios.post(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {}, {
       headers: { Authorization: `Bearer ${token}` }
-    }).then(response => {
+    }).then(_response => {
       //Set isFavorite state to true, now that this movie has been added to the list of Favorites
       this.setState({ isFavorite: true });
       window.open(`/movies/${this.props.movie._id}`, '_self');
@@ -57,7 +60,7 @@ export class MovieView extends React.Component {
     const token = localStorage.getItem('token');
     axios.delete(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }
-    }).then(response => {
+    }).then(_response => {
       //Set isFavorite state to false
       this.setState({isFavorite: false });
       window.open(`/movies/${this.props.movie._id}`, '_self');
@@ -123,7 +126,7 @@ export class MovieView extends React.Component {
   }
 }
 
-/* MovieView.propTypes = {
+MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
@@ -142,4 +145,4 @@ export class MovieView extends React.Component {
     })
   }).isRequired,
   onBackClick: PropTypes.func.isRequired 
-}; */
+};

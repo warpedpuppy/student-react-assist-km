@@ -35,8 +35,8 @@ export function NavbarView({user}) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && (
-              <Nav.Link href="/profile">{user}</Nav.Link>
+            {isAuth() && user && (
+              <Nav.Link href="/profile">{user.user}</Nav.Link>
             )}
             {isAuth() && (
               <Button variant="link" onClick={() => {
