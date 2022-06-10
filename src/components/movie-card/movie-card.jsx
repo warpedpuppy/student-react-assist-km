@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Container } from 'react-bootstrap';
 import './movie-card.scss';
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card id="movie-card">
+      <Card id="movie-card" bg='dark'>
         <Card.Img variant="top" src={ movie.ImagePath } />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
-// import Modal from 'react-bootstrap/Modal';
+import Modal from 'react-bootstrap/Modal';
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -15,7 +15,7 @@ export class ProfileView extends React.Component {
       Email: null,
       Birthday: null,
       FavoriteMovies: [],
-      // modalState: false
+      modalState: false
     };
   }
 
@@ -106,14 +106,14 @@ export class ProfileView extends React.Component {
   };
 
   // Show the modal to confirm you want to delete a user profile
-  // showModal() {
-  //   this.setState({ modalState: true })
-  // };
+  showModal() {
+    this.setState({ modalState: true })
+  };
 
-  // // Close the modal that confirms you want to delete a user profile
-  // closeModal() {
-  //   this.setState({ modalState: false })
-  // };
+  // Close the modal that confirms you want to delete a user profile
+  closeModal() {
+    this.setState({ modalState: false })
+  };
 
   //Deregister
   onDeleteUser() {
@@ -169,7 +169,7 @@ export class ProfileView extends React.Component {
 
     return (
       <Container className="profile-view" align="center">
-        {/* Modal specification which will display when attempting to delete a user
+        {/* Modal specification which will display when attempting to delete a user */}
         <Modal show={this.state.modalState} onHide={this.closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to delete your user profile?</Modal.Title>
@@ -183,7 +183,7 @@ export class ProfileView extends React.Component {
               Delete Profile
             </Button>
           </Modal.Footer>
-        </Modal> */}
+        </Modal>
         <Row>
           <Col>
             <Card className="show-profile">

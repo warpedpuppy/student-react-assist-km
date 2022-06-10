@@ -4,8 +4,8 @@ import { func } from "prop-types";
 export const SET_MOVIES = 'SET_MOVIES';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
-export const UPDATE_USER = 'UPDATE_USER';
-export const SET_FAVORITES = 'SET_FAVORITES';
+export const ADD_FAVMOVIE = 'ADD_FAVMOVIE';
+export const REM_FAVMOVIE = 'REM_FAVMOVIE';
 
 // action creators
 export function setMovies(value) {
@@ -22,23 +22,23 @@ export function setFilter(value) {
   };
 }
 
-export function setUser(value) {
+export function setUser(user) {
   return {
     type: SET_USER,
+    user: user?.Username
+  };
+}
+
+export function addFavMovie(value) {
+  return {
+    type: ADD_FAVMOVIE,
     value
   };
 }
 
-export function updateUser(value) {
+export function remFaveMovie(value) {
   return {
-    type: UPDATE_USER,
-    value
-  };
-}
-
-export function setFavorites(value) {
-  return {
-    type: SET_FAVORITES,
+    type: REM_FAVMOVIE,
     value
   };
 }

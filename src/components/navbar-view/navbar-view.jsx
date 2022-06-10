@@ -21,8 +21,8 @@ export function NavbarView({user}) {
   };
 
   return (
-    <Navbar sticky="top" expand="lg" variant="light" className="mainNavbar">
-      <Container fluid>
+    <Container fluid>
+      <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
         <Navbar.Brand className="navbar-logo" href="/">
           <img
             src="https://superflix-db.herokuapp.com/img/SuperFlixLogo.svg"
@@ -33,8 +33,8 @@ export function NavbarView({user}) {
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
+        <Navbar.Collapse id="responsive-navbar-nav" className="mainNavbar">
+          {/* <Nav className="ml-auto">
             {isAuth() && user && (
               <Nav.Link href="/profile">{user.user}</Nav.Link>
             )}
@@ -49,9 +49,25 @@ export function NavbarView({user}) {
             {!isAuth() && (
               <Nav.Link href="/register">Register</Nav.Link>
             )}
+          </Nav> */}
+          <Nav className="ml-auto mainNavbar">
+            {isAuth() && (
+              <Nav.Link href="/profile">{user}</Nav.Link>
+            )}
+            {isAuth() && (
+              <Button variant="link" onClick={() => {
+                onLoggedOut()
+              }}>Logout</Button>
+            )}
+            {!isAuth() && (
+              <Nav.Link href="/">Login</Nav.Link>
+            )}
+            {!isAuth() && (
+              <Nav.Link href="/register">Register</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </Navbar>
+    </Container>
   )
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { Row, Col, Button, Card, CardGroup, Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { updateUser, setUser } from '../../actions/actions';
+import { setUser, addFavMovie, remFaveMovie } from '../../actions/actions';
 import { connect } from 'react-redux';
 
 import './movie-view.scss';
@@ -18,10 +18,10 @@ export class MovieView extends React.Component {
       userDetails: []
     }
 
-    //Bind these additional functions that will get called by onClick events to 'this'
-    // this.addFavorite = this.addFavorite.bind(this);
-    // this.removeFavorite = this.removeFavorite.bind(this);
-    // this.getUser = this.getUser.bind(this);
+    // Bind these additional functions that will get called by onClick events to 'this'
+    this.addFavorite = this.addFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +45,7 @@ export class MovieView extends React.Component {
 
   addFavorite(){
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
     axios.post(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(_response => {

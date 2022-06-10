@@ -3,7 +3,9 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { setMovies, setUser } from '../../actions/actions';
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import { setMovies } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
@@ -19,12 +21,16 @@ class MainView extends React.Component {
 
   constructor() {
     super();
+    // Initial state is set to null
+    this.state = {
+      user: null
+    };
   }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.props.setUser({
+      this.setState({
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
@@ -34,7 +40,7 @@ class MainView extends React.Component {
     //Passed to LoginView
     onLoggedIn(authData) {
       console.log(authData);
-      this.props.setUser({
+      this.setState({
         user: authData.user.Username
       }); 
   
@@ -46,15 +52,18 @@ class MainView extends React.Component {
     onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      this.setState({
+        user:null,
+      });
       window.open('/', '_self');
     }
     
     getMovies(token) {
       axios.get('https://superflix-db.herokuapp.com/movies', {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-          //Assign the result to the movies props
+          //Assign the result to the state
           this.props.setMovies(response.data);
           })
         .catch(function (error) {
@@ -63,22 +72,18 @@ class MainView extends React.Component {
     }  
 
   render () {
-    let { movies, user } = this.props;
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
         <NavbarView user={user} />
         <Container>
           <Row className="main-view justify-content-md-center">
-
             <Route exact path="/" render={() => {
-              /* If there is no user, the LoginView is rendered.  If user is logged in, the user details are passed as a prop to the LoginView */
-              if (!user) return ( 
-              <Col>
-                <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
-              );
-
               if (movies.length === 0) return <div className="main-view" />;
 
               return <MoviesList movies={movies}/>;
@@ -194,11 +199,9 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { 
-    movies: state.movies,
-    user: state.user
-  }
+  return { movies: state.movies }
 }
 
-export default connect(mapStateToProps, { setMovies, setUser } ) (MainView);
+export default connect(mapStateToProps, { setMovies } ) (MainView);
+
 
