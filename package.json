@@ -7,7 +7,7 @@
   "name": "superflix-client",
   "description": "Using React, this build is for the client-side of an application called superFlix based on its existing server-side code (REST API and database).",
   "version": "1.0.0",
-  "main": "src/index.html",
+  "main": "index.js",
   "dependencies": {
     "axios": "^0.24.0",
     "prop-types": "^15.8.1",
