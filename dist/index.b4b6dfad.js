@@ -38128,17 +38128,17 @@ class ProfileView extends (0, _reactDefault.default).Component {
         });
     };
     // Show the modal to confirm you want to delete a user profile
-    showModal() {
+    showModal = ()=>{
         this.setState({
             modalState: true
         });
-    }
+    };
     // Close the modal that confirms you want to delete a user profile
-    closeModal() {
+    closeModal = ()=>{
         this.setState({
             modalState: false
         });
-    }
+    };
     //Deregister
     onDeleteUser() {
         const Username = localStorage.getItem("user");
@@ -38288,7 +38288,7 @@ class ProfileView extends (0, _reactDefault.default).Component {
                                                     lineNumber: 194,
                                                     columnNumber: 30
                                                 }, this),
-                                                Intl.DateTimeFormat().format(new Date(Birthday)),
+                                                Birthday,
                                                 " "
                                             ]
                                         }, void 0, true, {

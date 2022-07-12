@@ -106,12 +106,12 @@ export class ProfileView extends React.Component {
   };
 
   // Show the modal to confirm you want to delete a user profile
-  showModal() {
+  showModal = () => {
     this.setState({ modalState: true })
   };
 
   // Close the modal that confirms you want to delete a user profile
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalState: false })
   };
 
@@ -191,7 +191,7 @@ export class ProfileView extends React.Component {
                 <Card.Title className="text-center">Profile of {Username}</Card.Title>
                 <Card.Text><span className="profile_heading">Email: </span>{Email} </Card.Text>
                 {Birthday && (
-                  <Card.Text><span className="profile_heading">Birthday: </span>{Intl.DateTimeFormat().format(new Date(Birthday))} </Card.Text>
+                  <Card.Text><span className="profile_heading">Birthday: </span>{(Birthday)} </Card.Text>
                 )}
               </Card.Body>
             </Card>
