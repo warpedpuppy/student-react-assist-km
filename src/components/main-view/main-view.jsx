@@ -5,7 +5,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view'
@@ -23,7 +23,6 @@ class MainView extends React.Component {
     super();
     // Initial state is set to null
     this.state = {
-      user: null
     };
   }
 
@@ -40,7 +39,7 @@ class MainView extends React.Component {
     //Passed to LoginView
     onLoggedIn(authData) {
       console.log(authData);
-      this.setState({
+      this.props.setUser({
         user: authData.user.Username
       }); 
   
@@ -52,7 +51,7 @@ class MainView extends React.Component {
     onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      this.setState({
+      this.props.setUser({
         user:null,
       });
       window.open('/', '_self');
@@ -73,7 +72,7 @@ class MainView extends React.Component {
 
   render () {
     let { movies } = this.props;
-    let { user } = this.state;
+    let { user } = this.props;
 
     return (
       <Router>
@@ -199,9 +198,9 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, { setMovies } ) (MainView);
+export default connect(mapStateToProps, { setMovies, setUser } ) (MainView);
 
 

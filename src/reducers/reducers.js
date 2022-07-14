@@ -24,7 +24,7 @@ function movies(state = [], action) {
 function user(state = '', action) {
   switch (action.type) {
     case SET_USER:
-      return action.user || localStorage.getItem('user') || '';
+      return action.value;
     case ADD_FAVMOVIE:
       return action.value;
     case REM_FAVMOVIE:
