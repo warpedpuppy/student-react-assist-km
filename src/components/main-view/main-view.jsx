@@ -39,13 +39,13 @@ class MainView extends React.Component {
     //Passed to LoginView
     onLoggedIn(authData) {
       console.log(authData);
-      this.props.setUser({
-        user: authData.user.Username
-      }); 
+      this.props.setUser(
+        authData
+      ); 
   
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token);
+      // localStorage.setItem('token', authData.token);
+      // localStorage.setItem('user', authData.user.Username);
+      // this.getMovies(authData.token);
     }   
 
     onLoggedOut() {

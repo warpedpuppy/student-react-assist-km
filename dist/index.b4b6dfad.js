@@ -24584,12 +24584,10 @@ class MainView extends (0, _reactDefault.default).Component {
     //Passed to LoginView
     onLoggedIn(authData) {
         console.log(authData);
-        this.props.setUser({
-            user: authData.user.Username
-        });
-        localStorage.setItem("token", authData.token);
-        localStorage.setItem("user", authData.user.Username);
-        this.getMovies(authData.token);
+        this.props.setUser(authData);
+    // localStorage.setItem('token', authData.token);
+    // localStorage.setItem('user', authData.user.Username);
+    // this.getMovies(authData.token);
     }
     onLoggedOut() {
         localStorage.removeItem("token");
@@ -36639,10 +36637,10 @@ function setFilter(value) {
         value
     };
 }
-function setUser(user) {
+function setUser(value) {
     return {
         type: SET_USER,
-        user: user?.Username
+        value
     };
 }
 function addFavMovie(value) {
@@ -39527,13 +39525,9 @@ function movies(state = [], action) {
             return state;
     }
 }
-function user(state = "", action) {
+function user(state = null, action) {
     switch(action.type){
         case 0, _actions.SET_USER:
-            return action.user || localStorage.getItem("user") || "";
-        case 0, _actions.ADD_FAVMOVIE:
-            return action.value;
-        case 0, _actions.REM_FAVMOVIE:
             return action.value;
         default:
             return state;
