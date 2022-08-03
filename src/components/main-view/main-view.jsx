@@ -78,28 +78,22 @@ class MainView extends React.Component {
               exact
               path="/"
               render={() => {
-                if (!user) {
-                  return (
-                    <Col>
-                      <LoginView />
-                    </Col>
-                  );
+                if (!user?.user) {
+                  return <Redirect to="/login" />;
                 } 
-
                 return <MoviesList movies={movies} />;
               }}
             />
 
             <Route
               path="/login"
-              exact
               render={() => {
-                if (user) {
+                if (user?.user) {
                   return <Redirect to="/" />;
                 }
 
                 return (
-                  <LoginView />
+                  <LoginView setUser={this.props.setUser} getMovies={this.props.getMovies}  />
                 );
               }}
             />

@@ -53,7 +53,7 @@ export function NavbarView({user}) {
           </Nav> */}
           <Nav className="ml-auto mainNavbar">
             {isAuth() && (
-              <Nav.Link href="/profile">{user}</Nav.Link>
+              <Nav.Link href="/profile">{user?.user?.username}</Nav.Link>
             )}
             {isAuth() && (
               <Button variant="link" onClick={() => {

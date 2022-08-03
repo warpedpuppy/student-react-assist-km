@@ -1,21 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
-  Form,
-  Button,
-  Row,
-  Col,
-  Container,
-  Card,
-  CardGroup,
+  Button, Card,
+  CardGroup, Col, Form, Row
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./login-view.scss";
-import axios from "axios";
-import { connect } from "react-redux";
-import { setMovies, setUser } from "../../actions/actions";
 
-function LoginViewUnwrapped(props) {
+export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -132,10 +124,3 @@ function LoginViewUnwrapped(props) {
   );
 }
 
-let mapStateToProps = (state) => {
-  return { user: state.user };
-};
-
-export const LoginView = connect(mapStateToProps, { setUser, setMovies })(
-  LoginViewUnwrapped
-);
