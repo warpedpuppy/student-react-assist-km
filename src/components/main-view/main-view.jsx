@@ -101,9 +101,9 @@ class MainView extends React.Component {
             <Route
               path="/register"
               render={() => {
-                if (user) {
+                if (user?.user) {
                   return <Redirect to="/" />;
-                }
+                } 
 
                 return (
                   <Col lg={8} md={8}>
@@ -116,13 +116,9 @@ class MainView extends React.Component {
             <Route
               path="/movies/:movieId"
               render={({ match, history }) => {
-                if (!user) {
-                  return (
-                    <Col md={8}>
-                      <LoginView />
-                    </Col>
-                  );
-                }
+                if (!user?.user) {
+                  return <Redirect to="/login" />;
+                } 
 
                 if (movies.length === 0) {
                   return <div className="main-view" />;
@@ -143,13 +139,9 @@ class MainView extends React.Component {
             <Route
               path="/profile"
               render={({ history }) => {
-                if (!user) {
-                  return (
-                    <Col>
-                      <LoginView />
-                    </Col>
-                  );
-                }
+                if (!user?.user) {
+                  return <Redirect to="/login" />;
+                } 
 
                 return (
                   <Col md={8}>
@@ -165,13 +157,9 @@ class MainView extends React.Component {
             <Route
               path="/series/:name"
               render={({ match, history }) => {
-                if (!user) {
-                  return (
-                    <Col>
-                      <LoginView />
-                    </Col>
-                  );
-                }
+                if (!user?.user) {
+                  return <Redirect to="/login" />;
+                } 
 
                 if (movies.length === 0) {
                   return <div className="main-view" />;
@@ -197,13 +185,9 @@ class MainView extends React.Component {
             <Route
               path="/directors/:name"
               render={({ match, history }) => {
-                if (!user) {
-                  return (
-                    <Col>
-                      <LoginView />
-                    </Col>
-                  );
-                }
+                if (!user?.user) {
+                  return <Redirect to="/login" />;
+                } 
 
                 if (movies.length === 0) return <div className="main-view" />;
 
