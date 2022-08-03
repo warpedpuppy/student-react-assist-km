@@ -13,8 +13,9 @@ export function NavbarView({user}) {
     if (typeof window == "undefined") {
       return false;
     }
-    if (localStorage.getItem("token")) {
-      return localStorage.getItem("token");
+    console.log
+    if (user?.token) {
+      return true
     } else {
       return false;
     }
