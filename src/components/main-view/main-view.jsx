@@ -20,24 +20,6 @@ import "./main-view.scss";
 class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {};
-  }
-
-  componentDidMount() {
-    const accessToken = this.props?.user?.token
-    if (accessToken) {
-      this.getMovies(accessToken);
-    }
-  }
-
-  //Passed to LoginView
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.props.setUser(authData);
-
-    // localStorage.setItem('token', authData.token);
-    // localStorage.setItem('user', authData.user.Username);
-    // this.getMovies(authData.token);
   }
 
   onLoggedOut() {
@@ -49,25 +31,11 @@ class MainView extends React.Component {
     window.open("/", "_self");
   }
 
-  getMovies(token) {
-    axios
-      .get("https://superflix-db.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        //Assign the result to the state
-        this.props.setMovies(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   render() {
     let { movies } = this.props;
     let { user } = this.props;
 
-    console.log({userInMain:user})
+    console.log({ userInMain: user });
 
     return (
       <Router>
@@ -80,7 +48,7 @@ class MainView extends React.Component {
               render={() => {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
-                } 
+                }
                 return <MoviesList movies={movies} />;
               }}
             />
@@ -91,9 +59,11 @@ class MainView extends React.Component {
                 if (user?.user) {
                   return <Redirect to="/" />;
                 }
-
                 return (
-                  <LoginView setUser={this.props.setUser} getMovies={this.props.getMovies}  />
+                  <LoginView
+                    setUser={this.props.setUser}
+                    setMovies={this.props.setMovies}
+                  />
                 );
               }}
             />
@@ -103,7 +73,7 @@ class MainView extends React.Component {
               render={() => {
                 if (user?.user) {
                   return <Redirect to="/" />;
-                } 
+                }
 
                 return (
                   <Col lg={8} md={8}>
@@ -118,7 +88,7 @@ class MainView extends React.Component {
               render={({ match, history }) => {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
-                } 
+                }
 
                 if (movies.length === 0) {
                   return <div className="main-view" />;
@@ -141,12 +111,12 @@ class MainView extends React.Component {
               render={({ history }) => {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
-                } 
+                }
 
                 return (
                   <Col md={8}>
                     <ProfileView
-                      movies={movies}
+                      movies={user?.user?.FavoriteMovies}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -159,7 +129,7 @@ class MainView extends React.Component {
               render={({ match, history }) => {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
-                } 
+                }
 
                 if (movies.length === 0) {
                   return <div className="main-view" />;
@@ -187,7 +157,7 @@ class MainView extends React.Component {
               render={({ match, history }) => {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
-                } 
+                }
 
                 if (movies.length === 0) return <div className="main-view" />;
 

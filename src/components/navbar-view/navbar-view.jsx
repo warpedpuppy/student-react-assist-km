@@ -13,7 +13,6 @@ export function NavbarView({user}) {
     if (typeof window == "undefined") {
       return false;
     }
-    console.log
     if (user?.token) {
       return true
     } else {
@@ -53,7 +52,7 @@ export function NavbarView({user}) {
           </Nav> */}
           <Nav className="ml-auto mainNavbar">
             {isAuth() && (
-              <Nav.Link href="/profile">{user?.user?.username}</Nav.Link>
+              <Nav.Link href="/profile">{user?.user?.Username}</Nav.Link>
             )}
             {isAuth() && (
               <Button variant="link" onClick={() => {
