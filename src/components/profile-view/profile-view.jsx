@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
-export class ProfileView extends React.Component {
+class ProfileViewUnwrapped extends React.Component {
   constructor() {
     super();
 
@@ -19,10 +20,10 @@ export class ProfileView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const accessToken = localStorage.getItem('token');
-    this.getUser(accessToken);
-  }
+  // componentDidMount() {
+  //   const accessToken = localStorage.getItem('token');
+  //   this.getUser(accessToken);
+  // }
 
   onLoggedOut() {
     localStorage.removeItem('token');
@@ -311,21 +312,27 @@ export class ProfileView extends React.Component {
   }
 }
 
-ProfileView.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-      Title: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-      ImagePath: PropTypes.string.isRequired,
-      Series: PropTypes.shape({
-          Name: PropTypes.string.isRequired,
-          Description: PropTypes.string.isRequired,
-      }).isRequired,
-      Director: PropTypes.shape({
-          Bio: PropTypes.string,
-          Birth: PropTypes.string,
-          Death: PropTypes.string,
-          Name: PropTypes.string.isRequired,
-      }).isRequired,
-  })).isRequired,
-  onBackClick: PropTypes.func.isRequired
+// ProfileView.propTypes = {
+//   movies: PropTypes.arrayOf(PropTypes.shape({
+//       Title: PropTypes.string.isRequired,
+//       Description: PropTypes.string.isRequired,
+//       ImagePath: PropTypes.string.isRequired,
+//       Series: PropTypes.shape({
+//           Name: PropTypes.string.isRequired,
+//           Description: PropTypes.string.isRequired,
+//       }).isRequired,
+//       Director: PropTypes.shape({
+//           Bio: PropTypes.string,
+//           Birth: PropTypes.string,
+//           Death: PropTypes.string,
+//           Name: PropTypes.string.isRequired,
+//       }).isRequired,
+//   })).isRequired,
+//   onBackClick: PropTypes.func.isRequired
+// };
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies, user: state.user };
 };
+
+export const ProfileView= connect(mapStateToProps, { })(ProfileViewUnwrapped);
