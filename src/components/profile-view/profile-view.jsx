@@ -6,7 +6,7 @@ import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
-class ProfileViewUnwrapped extends React.Component {
+export class ProfileView extends React.Component {
   constructor() {
     super();
 
@@ -34,24 +34,24 @@ class ProfileViewUnwrapped extends React.Component {
     window.open('/', '_self');
   }
 
-  getUser = (token) => {
-    const Username = localStorage.getItem('user');
-    axios.get(`https://superflix-db.herokuapp.com/users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Password: "",
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // getUser = (token) => {
+  //   const Username = localStorage.getItem('user');
+  //   axios.get(`https://superflix-db.herokuapp.com/users/${Username}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => {
+  //       this.setState({
+  //         Username: response.data.Username,
+  //         Password: "",
+  //         Email: response.data.Email,
+  //         Birthday: response.data.Birthday,
+  //         FavoriteMovies: response.data.FavoriteMovies,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   //Allow user to edit or update profile
   editUser = (e) => {
@@ -161,8 +161,9 @@ class ProfileViewUnwrapped extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday, Password } = this.state;
+    const { FavoriteMovies, Username, Email, Birthday, Password } = this.props.user;
 
     if (!Username) {
       return null;
@@ -331,8 +332,8 @@ class ProfileViewUnwrapped extends React.Component {
 //   onBackClick: PropTypes.func.isRequired
 // };
 
-let mapStateToProps = (state) => {
-  return { movies: state.movies, user: state.user };
-};
+// let mapStateToProps = (state) => {
+//   return { movies: state.movies, user: state.user };
+// };
 
-export const ProfileView= connect(mapStateToProps, { })(ProfileViewUnwrapped);
+// export const ProfileView= connect(mapStateToProps, { })(ProfileViewUnwrapped);

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./login-view.scss";
 
 export function LoginView(props) {
+  console.log("loginprops=",props)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -63,8 +64,10 @@ export function LoginView(props) {
         })
         .then((response) => {
           const data = response.data;
-          // console.log(data);
-          // console.log(props);
+          console.log(data);
+          console.log(props);
+          localStorage.setItem("user", data.user.Username)
+          localStorage.setItem("token", data.token)
           props.setUser(data);
           getMovies(data?.token)
         });

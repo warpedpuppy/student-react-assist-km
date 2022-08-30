@@ -59,6 +59,7 @@ class MainView extends React.Component {
                 if (user?.user) {
                   return <Redirect to="/" />;
                 }
+                console.log("mainview",this.props)
                 return (
                   <LoginView
                     setUser={this.props.setUser}
@@ -98,6 +99,7 @@ class MainView extends React.Component {
                   <Col md={8}>
                     <MovieView
                       movie={movies.find((m) => m._id === match.params.movieId)}
+                      FavoriteMovies={user?.user?.FavoriteMovies}
                       user={user}
                       onBackClick={() => history.goBack()}
                     />
@@ -116,7 +118,9 @@ class MainView extends React.Component {
                 return (
                   <Col md={8}>
                     <ProfileView
-                      movies={user?.user?.FavoriteMovies}
+                      movies={movies}
+                      favMovies={user?.user?.FavoriteMovies}
+                      user={user?.user}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>

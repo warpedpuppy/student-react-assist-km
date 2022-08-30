@@ -1,5 +1,6 @@
 import React from 'react';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 import './navbar-view.scss';
 
@@ -23,7 +24,7 @@ export function NavbarView({user}) {
   return (
     <Container fluid>
       <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
-        <Navbar.Brand className="navbar-logo" href="/">
+        <Navbar.Brand className="navbar-logo" to="/" as={Link}>
           <img
             src="https://superflix-db.herokuapp.com/img/SuperFlixLogo.svg"
             width="150"
@@ -50,9 +51,9 @@ export function NavbarView({user}) {
               <Nav.Link href="/register">Register</Nav.Link>
             )}
           </Nav> */}
-          <Nav className="ml-auto mainNavbar">
+          <div className="ml-auto mainNavbar">
             {isAuth() && (
-              <Nav.Link href="/profile">{user?.user?.Username}</Nav.Link>
+              <Link to="/profile">{user?.user?.Username}</Link>
             )}
             {isAuth() && (
               <Button variant="link" onClick={() => {
@@ -60,12 +61,12 @@ export function NavbarView({user}) {
               }}>Logout</Button>
             )}
             {!isAuth() && (
-              <Nav.Link href="/">Login</Nav.Link>
+              <Link to="/">Login</Link>
             )}
             {!isAuth() && (
-              <Nav.Link href="/register">Register</Nav.Link>
+              <Link to="/register">Register</Link>
             )}
-          </Nav>
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </Container>
