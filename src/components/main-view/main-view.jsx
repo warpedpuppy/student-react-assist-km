@@ -49,7 +49,7 @@ class MainView extends React.Component {
                 if (!user?.user) {
                   return <Redirect to="/login" />;
                 }
-                return <MoviesList movies={movies} />;
+                return <MoviesList />;
               }}
             />
 
