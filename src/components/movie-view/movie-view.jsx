@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import axios from "axios";
-import { Row, Col, Button, Card, CardGroup, Container } from "react-bootstrap";
+import { Row, Col, Button, Card, CardGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { setUser, addFavMovie, remFaveMovie } from '../../actions/actions';
+import { setUser } from '../../actions/actions';
 import { connect } from 'react-redux';
 
 import './movie-view.scss';
+
+const mapStateToProps = state => {
+  const { movies, user } = state;
+  return { movies, user };
+};
 
 export class MovieView extends React.Component {
 
@@ -17,63 +22,108 @@ export class MovieView extends React.Component {
       FavoriteMovies: [],
       userDetails: []
     }
-
-    // Bind these additional functions that will get called by onClick events to 'this'
-    this.addFavorite = this.addFavorite.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
-    this.getUser = this.getUser.bind(this);
+    
+    // // Bind these additional functions that will get called by onClick events to 'this'
+    // this.addFavorite = this.addFavorite.bind(this);
+    // this.removeFavorite = this.removeFavorite.bind(this);
+    // this.getUser = this.getUser.bind(this);
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-    this.getUser(token);
-  }
+  // componentDidMount() {
+  //   const token = localStorage.getItem('token');
+  //   this.setUser(token);
+  // }
 
-  getUser(token) {
-    axios.get(`https://superflix-db.herokuapp.com/users/${this.props.user}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    }).then(response => {
-      // Use the response to set the user details in the state variables
-      this.setState({
-        userDetails: response.data,
-        FavoriteMovies: response.data.FavoriteMovies
-      });
-    }).catch(function(error) {
-      console.log(error);
-    });
-  }
+  // getUser(token) {
+  //   axios.get(`https://superflix-db.herokuapp.com/users/${this.props.user}`, {
+  //     headers: { Authorization: `Bearer ${token}`}
+  //   }).then(response => {
+  //     // Use the response to set the user details in the state variables
+  //     this.setState({
+  //       userDetails: response.data,
+  //       FavoriteMovies: response.data.FavoriteMovies
+  //     });
+  //   }).catch(function(error) {
+  //     console.log(error);
+  //   });
+  // }
 
-  addFavorite(){
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    axios.post(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {}, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(_response => {
-      //Set isFavorite state to true, now that this movie has been added to the list of Favorites
-      this.setState({ isFavorite: true });
-      window.open(`/movies/${this.props.movie._id}`, '_self');
-    }).catch(function(error) {
-      console.log(error);
-    });
-  }
+  // addFavorite(){
+  //   const token = localStorage.getItem('token');
+  //   // const user = localStorage.getItem('user');
+  //   axios.post(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {}, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   }).then(_response => {
+  //     //Set isFavorite state to true, now that this movie has been added to the list of Favorites
+  //     this.setState({ isFavorite: true });
+  //     window.open(`/movies/${this.props.movie._id}`, '_self');
+  //   }).catch(function(error) {
+  //     console.log(error);
+  //   });
+  // }
 
-  removeFavorite() {
-    const token = localStorage.getItem('token');
-    axios.delete(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(_response => {
-      //Set isFavorite state to false
-      this.setState({isFavorite: false });
-      window.open(`/movies/${this.props.movie._id}`, '_self');
-    }).catch(function(error) {
-      console.log(error);
-    });
-  }
+    // add a movie from FavoriteMovies list
+    addFavorite = (e, movie) => {
+      e.preventDefault();
+      const Username = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+  
+      axios.post(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.setState({ isFavorite: true });
+          window.open(`/movies/${this.props.movie._id}`, '_self');
+
+          alert("Movie removed");
+          this.componentDidMount();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+  
+
+  // removeFavorite() {
+  //   const token = localStorage.getItem('token');
+  //   axios.delete(`https://superflix-db.herokuapp.com/users/${this.props.user}/movies/${this.props.movie._id}`, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   }).then(_response => {
+  //     //Set isFavorite state to false
+  //     this.setState({isFavorite: false });
+  //     window.open(`/movies/${this.props.movie._id}`, '_self');
+  //   }).catch(function(error) {
+  //     console.log(error);
+  //   });
+  // }
+
+    // Delete a movie from FavoriteMovies list
+    removeFavorite = (e, movie) => {
+      e.preventDefault();
+      const Username = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+  
+      axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          alert("Movie removed");
+          this.componentDidMount();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+  
 
   render() {
     const { movie, onBackClick } = this.props;
 
-    const tempArray = this.state.FavoriteMovies;
+    const tempArray = this.props.FavoriteMovies;
     let isFavoriteNew = false
     if (tempArray.includes(this.props.movie._id)) {
       isFavoriteNew = true;
@@ -147,3 +197,5 @@ MovieView.propTypes = {
   }).isRequired,
   onBackClick: PropTypes.func.isRequired 
 };
+
+export default connect(mapStateToProps)(MovieView);
