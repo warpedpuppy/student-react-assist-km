@@ -46,7 +46,7 @@ class MainView extends React.Component {
               exact
               path="/"
               render={() => {
-                if (!user?.user) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
                 return <MoviesList />;
@@ -56,7 +56,7 @@ class MainView extends React.Component {
             <Route
               path="/login"
               render={() => {
-                if (user?.user) {
+                if (user) {
                   return <Redirect to="/" />;
                 }
                 console.log("mainview",this.props)
@@ -72,7 +72,7 @@ class MainView extends React.Component {
             <Route
               path="/register"
               render={() => {
-                if (user?.user) {
+                if (user) {
                   return <Redirect to="/" />;
                 }
 
@@ -87,7 +87,7 @@ class MainView extends React.Component {
             <Route
               path="/movies/:movieId"
               render={({ match, history }) => {
-                if (!user?.user) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
 
@@ -99,7 +99,7 @@ class MainView extends React.Component {
                   <Col md={8}>
                     <MovieView
                       movie={movies.find((m) => m._id === match.params.movieId)}
-                      FavoriteMovies={user?.user?.FavoriteMovies}
+                      FavoriteMovies={user.FavoriteMovies}
                       user={user}
                       onBackClick={() => history.goBack()}
                     />
@@ -111,7 +111,7 @@ class MainView extends React.Component {
             <Route
               path="/profile"
               render={({ history }) => {
-                if (!user?.user) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
 
@@ -119,8 +119,8 @@ class MainView extends React.Component {
                   <Col md={8}>
                     <ProfileView
                       movies={movies}
-                      favMovies={user?.user?.FavoriteMovies}
-                      user={user?.user}
+                      favMovies={user.FavoriteMovies}
+                      user={user}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -131,7 +131,7 @@ class MainView extends React.Component {
             <Route
               path="/series/:name"
               render={({ match, history }) => {
-                if (!user?.user) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
 
@@ -159,7 +159,7 @@ class MainView extends React.Component {
             <Route
               path="/directors/:name"
               render={({ match, history }) => {
-                if (!user?.user) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
 

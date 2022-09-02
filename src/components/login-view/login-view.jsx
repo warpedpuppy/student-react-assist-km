@@ -68,7 +68,7 @@ export function LoginView(props) {
           console.log(props);
           localStorage.setItem("user", data.user.Username)
           localStorage.setItem("token", data.token)
-          props.setUser(data);
+          props.setUser(data.user);
           getMovies(data?.token)
         });
       // .catch(e => {
