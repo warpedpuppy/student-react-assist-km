@@ -18,7 +18,7 @@ export class MovieView extends React.Component {
     super(props);
     //Create state variables that will be used to add/remove a movie from a users favorite list
     this.state = {
-      isFavoriteNew: props.FavoriteMovies.includes(this.props.movie._id),
+      isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
       FavoriteMovies: [],
       userDetails: []
     }
@@ -108,7 +108,7 @@ export class MovieView extends React.Component {
         )
         .then((response) => {
           //Set isFavorite state to false
-          this.setState({ isFavoriteNew: false });
+          this.setState({ isFavorite: false });
           console.log("Movie removed", response);
           // this.componentDidMount();
         })
@@ -120,10 +120,10 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
-    const { isFavoriteNew } = this.state;
+    const { isFavorite } = this.state;
 
 
-    const tempArray = this.props.FavoriteMovies;
+    // const tempArray = this.props.FavoriteMovies;
 
     return (
       <Row>
@@ -155,7 +155,8 @@ export class MovieView extends React.Component {
 
                   <div>
                     <Button onClick={() => { onBackClick(null); }} variant="dark">Back</Button>
-                    {isFavoriteNew ? 
+                    {
+                    isFavorite ? 
                       <Button className="float-right" variant="outline-warning" onClick={this.removeFavorite}>Remove from Favorites</Button>
                      : 
                       <Button className="float-right" variant="warning" onClick={this.addFavorite}>Add to Favorites</Button>

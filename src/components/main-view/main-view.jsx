@@ -166,7 +166,7 @@ class MainView extends React.Component {
                 if (movies.length === 0) return <div className="main-view" />;
 
                 return (
-                  <Col onMouseDown={8}>
+                  <Col md={8}>
                     <DirectorView
                       director={
                         movies.find(
