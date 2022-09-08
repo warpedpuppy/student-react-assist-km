@@ -22,17 +22,7 @@ export class MovieView extends React.Component {
       FavoriteMovies: [],
       userDetails: []
     }
-    
-    // // Bind these additional functions that will get called by onClick events to 'this'
-    // this.addFavorite = this.addFavorite.bind(this);
-    // this.removeFavorite = this.removeFavorite.bind(this);
-    // this.getUser = this.getUser.bind(this);
   }
-
-  // componentDidMount() {
-  //   const token = localStorage.getItem('token');
-  //   this.setUser(token);
-  // }
 
   // getUser(token) {
   //   axios.get(`https://superflix-db.herokuapp.com/users/${this.props.user}`, {
@@ -43,20 +33,6 @@ export class MovieView extends React.Component {
   //       userDetails: response.data,
   //       FavoriteMovies: response.data.FavoriteMovies
   //     });
-  //   }).catch(function(error) {
-  //     console.log(error);
-  //   });
-  // }
-
-  // addFavorite(){
-  //   const token = localStorage.getItem('token');
-  //   // const user = localStorage.getItem('user');
-  //     axios.post(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {}, {
-  //     headers: { Authorization: `Bearer ${token}` }
-  //   }).then(_response => {
-  //     //Set isFavorite state to true, now that this movie has been added to the list of Favorites
-  //     this.setState({ isFavorite: true });
-  //     // window.open(`/movies/${this.props.movie._id}`, '_self');
   //   }).catch(function(error) {
   //     console.log(error);
   //   });
@@ -82,20 +58,6 @@ export class MovieView extends React.Component {
         });
     };
   
-
-  // removeFavorite() {
-  //   const token = localStorage.getItem('token');
-  //     axios.delete(`https://superflix-db.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
-  //     headers: { Authorization: `Bearer ${token}` }
-  //   }).then(_response => {
-  //     //Set isFavorite state to false
-  //     this.setState({isFavorite: false });
-  //     // window.open(`/movies/${this.props.movie._id}`, '_self');
-  //   }).catch(function(error) {
-  //     console.log(error);
-  //   });
-  // }
-
     // Delete a movie from FavoriteMovies list
     removeFavorite = (e) => {
       e.preventDefault();
@@ -110,7 +72,6 @@ export class MovieView extends React.Component {
           //Set isFavorite state to false
           this.setState({ isFavorite: false });
           console.log("Movie removed", response);
-          // this.componentDidMount();
         })
         .catch(function (error) {
           console.log(error);

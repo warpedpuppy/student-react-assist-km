@@ -22,6 +22,8 @@ class MainView extends React.Component {
     super();
   }
 
+
+
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -32,8 +34,8 @@ class MainView extends React.Component {
   }
 
   render() {
-    let { movies } = this.props;
-    let { user } = this.props;
+    let { movies, user, setUser } = this.props;
+    // let { user } = this.props;
 
     console.log({ userInMain: user });
 
@@ -119,8 +121,9 @@ class MainView extends React.Component {
                   <Col md={8}>
                     <ProfileView
                       movies={movies}
-                      favMovies={user.FavoriteMovies}
+                      // favMovies={user.FavoriteMovies}
                       user={user}
+                      setUser={setUser}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>

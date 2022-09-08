@@ -6,9 +6,14 @@ import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
+const mapStateToProps = state => {
+  const { movies, user } = state;
+  return { movies, user };
+};
+
 export class ProfileView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       Username: null,
@@ -19,11 +24,6 @@ export class ProfileView extends React.Component {
       modalState: false
     };
   }
-
-  // componentDidMount() {
-  //   const accessToken = localStorage.getItem('token');
-  //   this.getUser(accessToken);
-  // }
 
   onLoggedOut() {
     localStorage.removeItem('token');
@@ -97,8 +97,14 @@ export class ProfileView extends React.Component {
         }
       )
       .then((response) => {
+        // this.setState({ isFavorite: false });
         console.log(response);
         alert("Movie removed");
+
+        let temp = {...this.props.user};
+        temp.FavoriteMovies.splice(temp.FavoriteMovies.indexOf(movie._id));
+        this.props.setUser(temp);
+
         this.componentDidMount();
       })
       .catch(function (error) {
@@ -164,6 +170,7 @@ export class ProfileView extends React.Component {
     console.log(this.props)
     const { movies, onBackClick } = this.props;
     const { FavoriteMovies, Username, Email, Birthday, Password } = this.props.user;
+    const { isFavorite } = this.state;
 
     if (!Username) {
       return null;
@@ -337,3 +344,5 @@ export class ProfileView extends React.Component {
 // };
 
 // export const ProfileView= connect(mapStateToProps, { })(ProfileViewUnwrapped);
+
+export default connect(mapStateToProps)(ProfileView);
