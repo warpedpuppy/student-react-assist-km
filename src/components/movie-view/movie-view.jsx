@@ -4,6 +4,7 @@ import axios from "axios";
 import { Row, Col, Button, Card, CardGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { MovieCard } from '../movie-card/movie-card';
 
 import './movie-view.scss';
 
@@ -38,45 +39,45 @@ export class MovieView extends React.Component {
   //   });
   // }
 
-    // add a movie to FavoriteMovies list
-    addFavorite = (e) => {
-      e.preventDefault();
-      const Username = localStorage.getItem('user');
-      const token = localStorage.getItem('token');
+    // // add a movie to FavoriteMovies list
+    // addFavorite = (e) => {
+    //   e.preventDefault();
+    //   const Username = localStorage.getItem('user');
+    //   const token = localStorage.getItem('token');
   
-      axios.post(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {}, {
-            headers: { Authorization: `Bearer ${token}` }
-          }
-        )
-        .then((response) => {
-          console.log(response);
-          this.setState({ isFavorite: true });
-          // window.open(`/movies/${this.props.movie._id}`, '_self');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
+    //   axios.post(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {}, {
+    //         headers: { Authorization: `Bearer ${token}` }
+    //       }
+    //     )
+    //     .then((response) => {
+    //       console.log(response);
+    //       this.setState({ isFavorite: true });
+    //       // window.open(`/movies/${this.props.movie._id}`, '_self');
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // };
   
-    // Delete a movie from FavoriteMovies list
-    removeFavorite = (e) => {
-      e.preventDefault();
-      const Username = localStorage.getItem('user');
-      const token = localStorage.getItem('token');
+    // // Delete a movie from FavoriteMovies list
+    // removeFavorite = (e) => {
+    //   e.preventDefault();
+    //   const Username = localStorage.getItem('user');
+    //   const token = localStorage.getItem('token');
   
-      axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then((response) => {
-          //Set isFavorite state to false
-          this.setState({ isFavorite: false });
-          console.log("Movie removed", response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
+    //   axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {
+    //         headers: { Authorization: `Bearer ${token}` },
+    //       }
+    //     )
+    //     .then((response) => {
+    //       //Set isFavorite state to false
+    //       this.setState({ isFavorite: false });
+    //       console.log("Movie removed", response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // };
   
 
   render() {

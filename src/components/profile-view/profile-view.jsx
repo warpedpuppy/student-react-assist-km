@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { MovieCard } from '../movie-card/movie-card';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
@@ -86,31 +87,31 @@ export class ProfileView extends React.Component {
       });
   };
 
-  // Delete a movie from FavoriteMovies list
-  onRemoveFavorite = (e, movie) => {
-    e.preventDefault();
-    const Username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+  // // Delete a movie from FavoriteMovies list
+  // onRemoveFavorite = (e, movie) => {
+  //   e.preventDefault();
+  //   const Username = localStorage.getItem('user');
+  //   const token = localStorage.getItem('token');
 
-    axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((response) => {
-        // this.setState({ isFavorite: false });
-        console.log(response);
-        alert("Movie removed");
+  //   axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       // this.setState({ isFavorite: false });
+  //       console.log(response);
+  //       alert("Movie removed");
 
-        let temp = {...this.props.user};
-        temp.FavoriteMovies.splice(temp.FavoriteMovies.indexOf(movie._id));
-        this.props.setUser(temp);
+  //       let temp = {...this.props.user};
+  //       temp.FavoriteMovies.splice(temp.FavoriteMovies.indexOf(movie._id));
+  //       this.props.setUser(temp);
 
-        this.componentDidMount();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  //       this.componentDidMount();
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   // Show the modal to confirm you want to delete a user profile
   showModal = () => {
@@ -170,7 +171,7 @@ export class ProfileView extends React.Component {
     console.log(this.props)
     const { movies, onBackClick } = this.props;
     const { FavoriteMovies, Username, Email, Birthday, Password } = this.props.user;
-    const { isFavorite } = this.state;
+    // const { isFavorite } = this.state;
 
     if (!Username) {
       return null;
@@ -302,7 +303,7 @@ export class ProfileView extends React.Component {
                           <Card.Title className="movie_title">
                             {movie.Title}
                           </Card.Title>
-                          <Button size="sm" variant="danger" value={movie._id} onClick={(e) => this.onRemoveFavorite(e, movie)}>Remove</Button>
+                          <Button size="sm" variant="danger" value={movie._id} onClick={(e) => this.removeFavorite(e, movie)}>Remove</Button>
                         </Card.Body>
                       </Card>
                     );
