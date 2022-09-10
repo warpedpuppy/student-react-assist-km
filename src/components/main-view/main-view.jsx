@@ -36,7 +36,7 @@ class MainView extends React.Component {
   render() {
     let { movies, user, setUser } = this.props;
     // let { user } = this.props;
-
+	console.log('main props', this.props)
     console.log({ userInMain: user });
 
     return (

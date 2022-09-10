@@ -19,7 +19,7 @@ export class MovieView extends React.Component {
     super(props);
     //Create state variables that will be used to add/remove a movie from a users favorite list
     this.state = {
-      isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
+    //   isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
       FavoriteMovies: [],
       userDetails: []
     }
@@ -117,12 +117,12 @@ export class MovieView extends React.Component {
 
                   <div>
                     <Button onClick={() => { onBackClick(null); }} variant="dark">Back</Button>
-                    {
+                    {/* {
                     isFavorite ? 
                       <Button className="float-right" variant="outline-warning" onClick={this.removeFavorite}>Remove from Favorites</Button>
                      : 
                       <Button className="float-right" variant="warning" onClick={this.addFavorite}>Add to Favorites</Button>
-                    }
+                    } */}
                   </div>
                 </Card.Text>
               </Card.Body>
