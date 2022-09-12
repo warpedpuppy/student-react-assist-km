@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import axios from "axios";
 import { Row, Col, Button, Card, CardGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { MovieCard } from '../movie-card/movie-card';
 
 import './movie-view.scss';
 
@@ -19,73 +17,14 @@ export class MovieView extends React.Component {
     super(props);
     //Create state variables that will be used to add/remove a movie from a users favorite list
     this.state = {
-      // isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
       FavoriteMovies: [],
       userDetails: []
     }
-  }
-
-  // getUser(token) {
-  //   axios.get(`https://superflix-db.herokuapp.com/users/${this.props.user}`, {
-  //     headers: { Authorization: `Bearer ${token}`}
-  //   }).then(response => {
-  //     // Use the response to set the user details in the state variables
-  //     this.setState({
-  //       userDetails: response.data,
-  //       FavoriteMovies: response.data.FavoriteMovies
-  //     });
-  //   }).catch(function(error) {
-  //     console.log(error);
-  //   });
-  // }
-
-    // // add a movie to FavoriteMovies list
-    // addFavorite = (e) => {
-    //   e.preventDefault();
-    //   const Username = localStorage.getItem('user');
-    //   const token = localStorage.getItem('token');
-  
-    //   axios.post(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {}, {
-    //         headers: { Authorization: `Bearer ${token}` }
-    //       }
-    //     )
-    //     .then((response) => {
-    //       console.log(response);
-    //       this.setState({ isFavorite: true });
-    //       // window.open(`/movies/${this.props.movie._id}`, '_self');
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // };
-  
-    // // Delete a movie from FavoriteMovies list
-    // removeFavorite = (e) => {
-    //   e.preventDefault();
-    //   const Username = localStorage.getItem('user');
-    //   const token = localStorage.getItem('token');
-  
-    //   axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${this.props.movie._id}`, {
-    //         headers: { Authorization: `Bearer ${token}` },
-    //       }
-    //     )
-    //     .then((response) => {
-    //       //Set isFavorite state to false
-    //       this.setState({ isFavorite: false });
-    //       console.log("Movie removed", response);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // };
-  
+  }  
 
   render() {
     const { movie, onBackClick } = this.props;
     const { isFavorite } = this.state;
-
-
-    // const tempArray = this.props.FavoriteMovies;
 
     return (
       <Row>
@@ -117,12 +56,6 @@ export class MovieView extends React.Component {
 
                   <div>
                     <Button onClick={() => { onBackClick(null); }} variant="dark">Back</Button>
-                    {/* {
-                    isFavorite ? 
-                      <Button className="float-right" variant="outline-warning" onClick={this.removeFavorite}>Remove from Favorites</Button>
-                     : 
-                      <Button className="float-right" variant="warning" onClick={this.addFavorite}>Add to Favorites</Button>
-                    } */}
                   </div>
                 </Card.Text>
               </Card.Body>

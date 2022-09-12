@@ -13,10 +13,9 @@ export class MovieCard extends React.Component {
     super(props);
     //Create state variables that will be used to add/remove a movie from a users favorite list
     this.state = {
-      // isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
       FavoriteMovies: [],
       userDetails: [],
-        isFavorite: this.props.user.FavoriteMovies.includes(this.props.movie._id)
+      isFavorite: this.props.user.FavoriteMovies.includes(this.props.movie._id)
     }
   }
 
@@ -33,7 +32,6 @@ export class MovieCard extends React.Component {
         .then((response) => {
           console.log(response);
           this.setState({ isFavorite: true });
-          // window.open(`/movies/${this.props.movie._id}`, '_self');
 
             let tempUser = {...this.props.user};
               tempUser.FavoriteMovies.push(this.props.movie._id);

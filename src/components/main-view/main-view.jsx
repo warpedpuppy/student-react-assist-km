@@ -1,10 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { Row, Col, Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { setMovies, setUser } from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
@@ -35,7 +32,6 @@ class MainView extends React.Component {
 
   render() {
     let { movies, user, setUser } = this.props;
-    // let { user } = this.props;
       console.log('main props', this.props)
     console.log({ userInMain: user });
 
@@ -121,7 +117,6 @@ class MainView extends React.Component {
                   <Col md={8}>
                     <ProfileView
                       movies={movies}
-                      // favMovies={user.FavoriteMovies}
                       user={user}
                       setUser={setUser}
                       onBackClick={() => history.goBack()}

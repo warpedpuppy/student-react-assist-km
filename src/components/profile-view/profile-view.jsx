@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
@@ -35,25 +34,6 @@ export class ProfileView extends React.Component {
     window.open('/', '_self');
   }
 
-  // getUser = (token) => {
-  //   const Username = localStorage.getItem('user');
-  //   axios.get(`https://superflix-db.herokuapp.com/users/${Username}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((response) => {
-  //       this.setState({
-  //         Username: response.data.Username,
-  //         Password: "",
-  //         Email: response.data.Email,
-  //         Birthday: response.data.Birthday,
-  //         FavoriteMovies: response.data.FavoriteMovies,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
   //Allow user to edit or update profile
   editUser = (e) => {
     e.preventDefault();
@@ -86,32 +66,6 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   };
-
-  // // Delete a movie from FavoriteMovies list
-  // onRemoveFavorite = (e, movie) => {
-  //   e.preventDefault();
-  //   const Username = localStorage.getItem('user');
-  //   const token = localStorage.getItem('token');
-
-  //   axios.delete(`https://superflix-db.herokuapp.com/users/${Username}/movies/${movie._id}`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       // this.setState({ isFavorite: false });
-  //       console.log(response);
-  //       alert("Movie removed");
-
-  //       let temp = {...this.props.user};
-  //       temp.FavoriteMovies.splice(temp.FavoriteMovies.indexOf(movie._id));
-  //       this.props.setUser(temp);
-
-  //       this.componentDidMount();
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
 
   // Show the modal to confirm you want to delete a user profile
   showModal = () => {
@@ -171,7 +125,6 @@ export class ProfileView extends React.Component {
     console.log(this.props)
     const { movies, onBackClick } = this.props;
     const { FavoriteMovies, Username, Email, Birthday, Password } = this.props.user;
-    // const { isFavorite } = this.state;
 
     if (!Username) {
       return null;
@@ -293,21 +246,6 @@ export class ProfileView extends React.Component {
                     FavoriteMovies.find((fav) => fav === movie._id)
                   ) {
                     return (<MovieCard movie={movie} key={movie._id} />)
-                    // return (
-                    //   <Card className="favorite-movie card-content" key={movie._id} >
-                    //     <Card.Img
-                    //       className="fav-poster"
-                    //       variant="top"
-                    //       src={movie.ImagePath}
-                    //     />
-                    //     <Card.Body style={{ backgroundColor: "black" }}>
-                    //       <Card.Title className="movie_title">
-                    //         {movie.Title}
-                    //       </Card.Title>
-                    //       <Button size="sm" variant="danger" value={movie._id} onClick={(e) => this.removeFavorite(e, movie)}>Remove</Button>
-                    //     </Card.Body>
-                    //   </Card>
-                    // );
                   }
                 })}
               </Row>  
@@ -321,30 +259,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
-
-// ProfileView.propTypes = {
-//   movies: PropTypes.arrayOf(PropTypes.shape({
-//       Title: PropTypes.string.isRequired,
-//       Description: PropTypes.string.isRequired,
-//       ImagePath: PropTypes.string.isRequired,
-//       Series: PropTypes.shape({
-//           Name: PropTypes.string.isRequired,
-//           Description: PropTypes.string.isRequired,
-//       }).isRequired,
-//       Director: PropTypes.shape({
-//           Bio: PropTypes.string,
-//           Birth: PropTypes.string,
-//           Death: PropTypes.string,
-//           Name: PropTypes.string.isRequired,
-//       }).isRequired,
-//   })).isRequired,
-//   onBackClick: PropTypes.func.isRequired
-// };
-
-// let mapStateToProps = (state) => {
-//   return { movies: state.movies, user: state.user };
-// };
-
-// export const ProfileView= connect(mapStateToProps, { })(ProfileViewUnwrapped);
 
 export default connect(mapStateToProps)(ProfileView);
