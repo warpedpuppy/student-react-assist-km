@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { MovieCard } from '../movie-card/movie-card';
+import MovieCard from '../movie-card/movie-card';
 import './profile-view.scss';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
@@ -292,21 +292,22 @@ export class ProfileView extends React.Component {
                     movie._id ===
                     FavoriteMovies.find((fav) => fav === movie._id)
                   ) {
-                    return (
-                      <Card className="favorite-movie card-content" key={movie._id} >
-                        <Card.Img
-                          className="fav-poster"
-                          variant="top"
-                          src={movie.ImagePath}
-                        />
-                        <Card.Body style={{ backgroundColor: "black" }}>
-                          <Card.Title className="movie_title">
-                            {movie.Title}
-                          </Card.Title>
-                          <Button size="sm" variant="danger" value={movie._id} onClick={(e) => this.removeFavorite(e, movie)}>Remove</Button>
-                        </Card.Body>
-                      </Card>
-                    );
+                    return (<MovieCard movie={movie} key={movie._id} />)
+                    // return (
+                    //   <Card className="favorite-movie card-content" key={movie._id} >
+                    //     <Card.Img
+                    //       className="fav-poster"
+                    //       variant="top"
+                    //       src={movie.ImagePath}
+                    //     />
+                    //     <Card.Body style={{ backgroundColor: "black" }}>
+                    //       <Card.Title className="movie_title">
+                    //         {movie.Title}
+                    //       </Card.Title>
+                    //       <Button size="sm" variant="danger" value={movie._id} onClick={(e) => this.removeFavorite(e, movie)}>Remove</Button>
+                    //     </Card.Body>
+                    //   </Card>
+                    // );
                   }
                 })}
               </Row>  

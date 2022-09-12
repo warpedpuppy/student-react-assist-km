@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import './movie-card.scss';
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-
-const mapStateToProps = state => {
-  const { movies, user } = state;
-  return { movies, user };
-};
+import { setUser } from "../../actions/actions";
 
 export class MovieCard extends React.Component {
 
@@ -18,7 +15,8 @@ export class MovieCard extends React.Component {
     this.state = {
       // isFavorite: props.FavoriteMovies.includes(this.props.movie._id),
       FavoriteMovies: [],
-      userDetails: []
+      userDetails: [],
+        isFavorite: this.props.user.FavoriteMovies.includes(this.props.movie._id)
     }
   }
 
@@ -36,6 +34,11 @@ export class MovieCard extends React.Component {
           console.log(response);
           this.setState({ isFavorite: true });
           // window.open(`/movies/${this.props.movie._id}`, '_self');
+
+            let tempUser = {...this.props.user};
+              tempUser.FavoriteMovies.push(this.props.movie._id);
+              console.log(tempUser)
+              this.props.setUser(tempUser)
         })
         .catch(function (error) {
           console.log(error);
@@ -55,6 +58,10 @@ export class MovieCard extends React.Component {
             .then((response) => {
               //Set isFavorite state to false
               this.setState({ isFavorite: false });
+                let tempUser = {...this.props.user};
+                tempUser.FavoriteMovies.splice(tempUser.FavoriteMovies.indexOf(this.props.movie._id), 1);
+                console.log(tempUser)
+                this.props.setUser(tempUser)
               console.log("Movie removed", response);
             })
             .catch(function (error) {
@@ -64,8 +71,9 @@ export class MovieCard extends React.Component {
     
   render() {
     const { movie } = this.props;
-    // const { isFavorite } = this.state;
+    const { isFavorite } = this.state;
     const tempArray = this.props.FavoriteMovies;
+      console.log('movie card props', this.props)
 
 
     return (
@@ -74,9 +82,15 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant="light">More info</Button>
-          </Link>
+            <Link to={`/movies/${movie._id}`}>
+              <Button variant="light">More info</Button>
+            </Link>
+            {
+            isFavorite ? 
+              <Button className="float-right" variant="outline-warning" onClick={this.removeFavorite}>Remove from Favorites</Button>
+              : 
+              <Button className="float-right" variant="warning" onClick={this.addFavorite}>Add to Favorites</Button>
+            }
         </Card.Body>
       </Card>
     );
@@ -102,4 +116,9 @@ MovieCard.propTypes = {
   onMovieClick: PropTypes.func
 };
 
-export default connect(mapStateToProps)(MovieCard);
+const mapStateToProps = state => {
+	const { movies, user } = state;
+	return { movies, user };
+  };
+
+export default connect(mapStateToProps, { setUser })(MovieCard);
