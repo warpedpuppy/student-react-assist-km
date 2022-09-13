@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button, Card,
   CardGroup, Col, Form, Row
@@ -15,14 +15,6 @@ export function LoginView(props) {
   //Declare hook for each input
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
-
-  useEffect(() => {
-    // put 'run once' code here
-
-    //check localstorage for user and token
-    //if they exist, use user and token to get the movie data and user data
-    //with that data, hit setUser props
-    }, [])
 
   // validate user inputs
   const validate = () => {
@@ -79,14 +71,8 @@ export function LoginView(props) {
           props.setUser(data.user);
           getMovies(data?.token)
         });
-      // .catch(e => {
-      //   console.log('no such user');
-      //   alert('Something wasn\'t entered right');
-      // });
     }
   };
-
-
 
   return (
     <Row>

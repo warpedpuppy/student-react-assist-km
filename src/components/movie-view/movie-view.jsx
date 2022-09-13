@@ -24,7 +24,6 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
-    const { isFavorite } = this.state;
 
     return (
       <Row>

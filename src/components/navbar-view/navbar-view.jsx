@@ -22,7 +22,7 @@ export function NavbarView({user}) {
   };
 
   return (
-    <Container fluid>
+    // <Container fluid>
       <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
         <Navbar.Brand className="navbar-logo" to="/" as={Link}>
           <img
@@ -35,22 +35,6 @@ export function NavbarView({user}) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse id="responsive-navbar-nav" className="mainNavbar">
-          {/* <Nav className="ml-auto">
-            {isAuth() && user && (
-              <Nav.Link href="/profile">{user.user}</Nav.Link>
-            )}
-            {isAuth() && (
-              <Button variant="link" onClick={() => {
-                onLoggedOut()
-              }}>Logout</Button>
-            )}
-            {!isAuth() && (
-              <Nav.Link href="/">Login</Nav.Link>
-            )}
-            {!isAuth() && (
-              <Nav.Link href="/register">Register</Nav.Link>
-            )}
-          </Nav> */}
           <div className="ml-auto mainNavbar">
             {isAuth() && (
               <Link to="/profile">{user.Username}</Link>
@@ -69,6 +53,6 @@ export function NavbarView({user}) {
           </div>
         </Navbar.Collapse>
       </Navbar>
-    </Container>
+    // </Container>
   )
 }
