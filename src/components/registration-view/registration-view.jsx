@@ -1,55 +1,153 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import axios from 'axios';
+import { Form, Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
 import './registration-view.scss';
+import { Link } from "react-router-dom";
+
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+  //Declare hook for each required input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
+  // validate user inputs
+  const validate = () => {
+    let isReq = true;
+
+    if(!username){
+      setUsernameErr('Username required');
+      isReq = false;
+    } else if (username.length < 5) {
+      setUsernameErr('Username must be at least 5 characters long');
+      isReq = false;
+    }
+    if(!password){
+      setPasswordErr('Password required');
+      isReq = false;
+    } else if(password.length < 6){
+      setPasswordErr('Password must be at least 6 characters long');
+      isReq = false;
+    }
+    if(!email) {
+      setEmailErr('Email required');
+      isReq = false;
+    } else if(email.indexOf('@') === -1) {
+      setEmailErr('Email must be valid');
+      isReq = false;
+    }
+
+    return isReq;
+  }
+
+  //Assign variable isReq to validate function
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    /* Send a request to the server for authentication */
-    /* then call props on registered user(username) */
-    props.onRegister(true, username);
+    const isReq = validate();
+    if(isReq){
+      axios.post('https://superflix-db.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        alert('Registration successful, please login!');
+        window.open('/', '_self');
+      })
+      .catch(response => {
+        console.error(response);
+        alert('unable to register');
+      });
+    }
   };
 
   return (
-    <div className="registration-view">
-      <h2>Sign up for a free SuperFlix account:</h2>
+    <Row>
+      <Col>
+        <CardGroup>
+          <Card>
+            <Card.Body>
+              <Card.Title>Please Register</Card.Title>
+              <Form>
+                <Form.Group>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter a username"
+                  />
+                  {usernameErr && <p>{usernameErr}</p>}
+                </Form.Group>
 
-      <form className="registration-form">
+                <Form.Group>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    minLength="6"
+                    placeholder='Your password must be 6 or more characters'
+                  />
+                  {passwordErr && <p>{passwordErr}</p>}
+                </Form.Group>
 
-        <label>
-          Username:
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        </label>
+                <Form.Group>
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your email address"
+                  />
+                  {emailErr && <p>{emailErr}</p>}
+                </Form.Group>
 
-        <label>
-          Password:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </label>
+                <Form.Group>
+                  <Form.Label>Birthday:</Form.Label>
+                  <Form.Control
+                    type="Date"
+                    value={birthday}
+                    onChange={e => setBirthday(e.target.value)}
+                    placeholder='Optional'
+                  />
+                </Form.Group>
 
-        <label>
-          Email:
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        </label>
+                <Button variant="primary" type="submit"
+                  onClick={handleSubmit}>
+                  Register
+                </Button>
 
-        <label>
-          Birthday:
-          <input type="birthday" value={email} onChange={e => setBirthday(e.target.value)} />
-        </label>
+                <Link to={"/"}>
+                  <Button variant="success">Return to Login</Button>
+                </Link>
 
-        <button type="submit" onClick={handleSubmit}>Register</button>
-      </form>
-    </div>
+
+              </Form>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+      </Col>
+    </Row>
   );
 }
 
 RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired
+  register: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  })
 };
 
