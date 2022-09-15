@@ -22,7 +22,6 @@ export function NavbarView({user}) {
   };
 
   return (
-    // <Container fluid>
       <Navbar sticky="top" expand="lg" variant="dark" className="mainNavbar">
         <Navbar.Brand className="navbar-logo" to="/" as={Link}>
           <img
@@ -44,15 +43,14 @@ export function NavbarView({user}) {
                 onLoggedOut()
               }}>Logout</Button>
             )}
-            {!isAuth() && (
+            {/* {!isAuth() && (
               <Link to="/">Login</Link>
-            )}
-            {!isAuth() && (
+            )} */}
+            {/* {!isAuth() && (
               <Link to="/register">Register</Link>
-            )}
+            )} */}
           </div>
         </Navbar.Collapse>
       </Navbar>
-    // </Container>
   )
 }

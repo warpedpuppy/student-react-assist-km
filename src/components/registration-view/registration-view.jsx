@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
 import './registration-view.scss';
-//import { Link } from 'react-router-dom'
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -69,72 +68,70 @@ export function RegistrationView(props) {
   };
 
   return (
-    //<Container>
-      <Row>
-        <Col>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Please Register</Card.Title>
-                <Form>
-                  <Form.Group>
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={username}
-                      onChange={e => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter a username"
-                    />
-                    {usernameErr && <p>{usernameErr}</p>}
-                  </Form.Group>
+    <Row>
+      <Col>
+        <CardGroup>
+          <Card>
+            <Card.Body>
+              <Card.Title>Please Register</Card.Title>
+              <Form>
+                <Form.Group>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter a username"
+                  />
+                  {usernameErr && <p>{usernameErr}</p>}
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
-                      minLength="6"
-                      placeholder='Your password must be 6 or more characters'
-                    />
-                    {passwordErr && <p>{passwordErr}</p>}
-                  </Form.Group>
+                <Form.Group>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    minLength="6"
+                    placeholder='Your password must be 6 or more characters'
+                  />
+                  {passwordErr && <p>{passwordErr}</p>}
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      required
-                      placeholder="Enter your email address"
-                    />
-                    {emailErr && <p>{emailErr}</p>}
-                  </Form.Group>
+                <Form.Group>
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your email address"
+                  />
+                  {emailErr && <p>{emailErr}</p>}
+                </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Birthday:</Form.Label>
-                    <Form.Control
-                      type="Date"
-                      value={birthday}
-                      onChange={e => setBirthday(e.target.value)}
-                      placeholder='Optional'
-                    />
-                  </Form.Group>
+                <Form.Group>
+                  <Form.Label>Birthday:</Form.Label>
+                  <Form.Control
+                    type="Date"
+                    value={birthday}
+                    onChange={e => setBirthday(e.target.value)}
+                    placeholder='Optional'
+                  />
+                </Form.Group>
 
-                  <Button variant="primary" type="submit"
-                    onClick={handleSubmit}>
-                    Register
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
-    //</Container>
+                <Button variant="primary" type="submit"
+                  onClick={handleSubmit}>
+                  Register
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+      </Col>
+    </Row>
   );
 }
 
@@ -144,6 +141,5 @@ RegistrationView.propTypes = {
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired
   })
-  //onRegister: PropTypes.func.isRequired,
 };
 
