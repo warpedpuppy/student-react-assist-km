@@ -16,14 +16,16 @@ export class ProfileView extends React.Component {
     super(props);
 
     this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavoriteMovies: [],
+      Username: props.user.Username,
+      Password: props.user.Password,
+      Email: props.user.Email,
+      Birthday: props.user.Birthday,
+      FavoriteMovies: props.user.FavoriteMovies,
       modalState: false
     };
   }
+
+
 
   onLoggedOut() {
     localStorage.removeItem('token');
@@ -39,6 +41,15 @@ export class ProfileView extends React.Component {
     e.preventDefault();
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
+
+	let obj = {
+		Username: this.state.Username,
+		Password: this.state.Password,
+		Email: this.state.Email,
+		Birthday: this.state.Birthday,
+	}
+	console.log('obj', obj)
+	
 
     axios.put(`https://superflix-db.herokuapp.com/users/${Username}`, {
           Username: this.state.Username,
@@ -122,9 +133,9 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday, Password } = this.props.user;
+    const { FavoriteMovies, Username, Email, Birthday, Password } = this.state;
 
     if (!Username) {
       return null;
