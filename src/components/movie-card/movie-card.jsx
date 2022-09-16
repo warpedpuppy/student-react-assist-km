@@ -77,18 +77,22 @@ export class MovieCard extends React.Component {
     return (
       <Card className="movie-card" bg='dark'>
         <Card.Img variant="top" src={ movie.ImagePath } />
-        <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
+        <Card.Body style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <div>
+            <Card.Title>{movie.Title}</Card.Title>
+            <Card.Text>{movie.Description}</Card.Text>
+          </div>
+          <div style={{marginTop: '12px'}}>
             <Link to={`/movies/${movie._id}`}>
-              <Button variant="light">More info</Button>
+              <Button variant="light" size="sm">More info</Button>
             </Link>
             {
             isFavorite ? 
-              <Button className="float-right" variant="outline-warning" onClick={this.removeFavorite}>Remove from Favorites</Button>
+              <Button className="float-right" variant="outline-warning" size="sm" onClick={this.removeFavorite}>Remove from Favorites</Button>
               : 
-              <Button className="float-right" variant="warning" onClick={this.addFavorite}>Add to Favorites</Button>
+              <Button className="float-right" variant="warning" size="sm" onClick={this.addFavorite}>Add to Favorites</Button>
             }
+          </div>  
         </Card.Body>
       </Card>
     );
